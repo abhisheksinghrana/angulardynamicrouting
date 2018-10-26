@@ -1,0 +1,74 @@
+@import '~bootstrap/scss/mixins';
+@import '~assets/scss/_common';
+
+.content-container {
+  width: 100%;
+  height: calc(100% - 20px);
+  padding: 0;
+  line-height: normal;
+}
+
+.left-section {
+  width: 15%;
+  float: left;
+  height: 100%;
+  border-right: 1px solid $mouse-grey-color;
+
+  .region-dropdown {
+    padding: 10px 20px;
+    width: 100%;
+
+    select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      width: 95%;
+      border: none;
+      color: $primary-color;
+      line-height: normal;
+      cursor: pointer;
+      padding-right: 14px;
+      background-color: transparent;
+      padding-left: 0px;
+      font-size: $small-font;
+
+      option {
+        color: $mole-grey-color;
+      }
+    }
+
+    .ck-arrow_down {
+      font-size: $xx-small-font;
+      margin-left: -20px;
+      color: $primary-color;
+    }
+  }
+
+  .menu-list {
+    font-size: $small-font;
+    padding: 10px 20px;
+    border-top: 1px solid $mouse-grey-color;
+  }
+
+  .menu-item {
+    margin: 10px 15px 10px 0;
+    cursor: pointer;
+    @include text-truncate();
+
+    &.active {
+      a {
+        color: $secondary-color;
+      }
+    }
+  }
+}
+
+.right-section {
+  width: 85%;
+  float: left;
+  height: 100%;
+}
+
+.content {
+  margin: 15px;
+}

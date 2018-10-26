@@ -1,0 +1,121 @@
+@import './_colors';
+@import './_fonts';
+@import './_mixins';
+@import './_defaults';
+
+a {
+  color: $mole-grey-color;
+  text-decoration: none;
+
+  &:hover {
+    color: $secondary-color;
+  }
+}
+
+.cockpit-blue {
+  color: $secondary-color;
+}
+
+.cockpit-orange {
+  color: $primary-color;
+}
+
+.close {
+  float: right;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: $mole-grey-color;
+  text-shadow: 0 1px 0 $white-color;
+  opacity: 0.5;
+}
+
+.close:focus,
+.close:hover {
+  color: $mole-grey-color;
+  text-decoration: none;
+  opacity: 0.75;
+}
+
+button.close {
+  padding: 0;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+}
+
+.notification-dialog {
+  .modal-dialog {
+    width: 370px;
+  }
+}
+
+.ui-select-container {
+  font-family: $font-body;
+  font-size: $small-font;
+  border-bottom: 1px solid $mouse-grey-color;
+  padding: 3px 3px 3px 0px !important;
+
+  .dropdown-menu {
+    list-style: none;
+    padding-left: 0;
+    position: absolute;
+    z-index: 999;
+    background-color: $white-color;
+    max-width: 500px;
+    border: 1px solid $mouse-grey-color;
+    margin-top: 3px !important;
+
+    .menuitem {
+      .dropdown-item {
+        padding-left: 3px;
+      }
+    }
+  }
+
+  .ui-select-match-item {
+    position: relative;
+    font-family: $font-body;
+    font-size: $small-font;
+
+    .close {
+      position: absolute;
+      margin-left: 50px !important;
+      right: 1px;
+    }
+  }
+
+  .ui-select-choices-row {
+    &.active > a {
+      background-color: $primary-color !important;
+    }
+  }
+}
+
+.heading {
+  font-family: $font-body;
+  color: $secondary-color;
+  font-size: $medium-font;
+  margin-bottom: 10px;
+}
+
+input {
+  &::-webkit-input-placeholder {
+    color: $elephant-grey-color;
+  }
+
+  &:-moz-placeholder {
+    color: $elephant-grey-color;
+  }
+
+  &::-moz-placeholder {
+    color: $elephant-grey-color;
+  }
+
+  &:-ms-input-placeholder {
+    color: $elephant-grey-color;
+  }
+}
+
+small {
+  font-size: $xx-small-font;
+}

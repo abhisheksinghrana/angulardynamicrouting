@@ -1,0 +1,22 @@
+<section class="content-container animation-form">
+  <app-header></app-header>
+  <div class="left-section">
+    <div class="region-dropdown" [formGroup]="regionForm">
+      <select class="input-field" formControlName="regionId" (change)="getRegionWiseData()">
+        <option value="" *ngIf="!regionForm.get('regionId').value">Select region</option>
+        <option *ngFor="let region of regionList" [value]="region.id">{{region.name}}</option>
+      </select>
+      <span class="ck ck-arrow_down"></span>
+    </div>
+    <div class="menu-list">
+      <div class="menu-item" [title]="menu?.name" routerLinkActive="active" *ngFor="let menu of menuList">
+        <a [routerLink]="menu?.route">{{menu?.name}}</a>
+      </div>
+    </div>
+  </div>
+  <div class="right-section">
+    <div class="content animation-form">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,14 @@
+<section class="header-section">
+  <div class="left-section">
+    <div class="title">HRM Settings</div>
+  </div>
+  <div class="right-section">
+    <div class="menu-list">
+      <ng-container *ngFor="let menu of menuTabList">
+        <a class="menu-item" [title]="menu?.name" routerLinkActive="active" [routerLink]="menu?.route">
+          <span class="name">{{menu?.name}}</span>
+        </a>
+      </ng-container>
+    </div>
+  </div>
+</section>

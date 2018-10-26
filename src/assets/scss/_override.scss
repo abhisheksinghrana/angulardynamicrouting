@@ -1,0 +1,33 @@
+.cockpit-tab {
+  ul {
+    li {
+      a {
+        font-size: $small-font;
+      }
+    }
+  }
+}
+
+.animation-form {
+  .form-element-wrap {
+    min-height: 30px;
+    float: left;
+    padding: 0;
+    margin-bottom: 15px;
+  }
+
+  select.input-field {
+    padding-left: 3px;
+    cursor: pointer;
+  }
+
+  select.input-field + .ck-arrow_down {
+    font-size: $x-small-font;
+    margin-left: -20px;
+    color: $wolf-grey-color;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}

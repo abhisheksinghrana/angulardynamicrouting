@@ -1,0 +1,61 @@
+<section class="internal-categories-section">
+  <article class="content-header-section">
+    <h1 class="heading">Internal</h1>
+    <div class="row">
+      <div class="col-lg-9 col-md-12 col-sm-12">
+        <div class="cockpit-table">
+          <div class="cockpit-table-row">
+            <div class="cockpit-header-cell internal-col" title="Internal">Internal</div>
+            <div class="cockpit-header-cell description-col" title="Description">Description</div>
+            <div class="cockpit-header-cell category-col" title="Category">Category</div>
+            <div class="cockpit-header-cell operations-col">&nbsp;</div>
+          </div>
+          <div class="cockpit-table-row add-internal-category-form">
+            <form [formGroup]="timeAddInternalCategoryForm" (ngSubmit)="addInternalCategory(timeAddInternalCategoryForm)">
+              <div class="cockpit-body-cell internal-col">
+                <input type="text" placeholder="Add internal" formControlName="name" maxlength="50" (focus)="onAddInternalCategoryFocus()">
+                <small *ngIf="timeAddInternalCategoryForm.get('name').hasError('required') && timeAddInternalCategoryForm.get('name').touched"
+                  class="d-block text-danger">
+                  Internal is required
+                </small>
+                <small *ngIf="timeAddInternalCategoryForm.get('name').hasError('whitespace') && timeAddInternalCategoryForm.get('name').touched"
+                  class="d-block text-danger">
+                  Please enter valid data
+                </small>
+              </div>
+              <div class="cockpit-body-cell description-col" *ngIf="showAddCategoryFields">
+                <input type="text" placeholder="Description" formControlName="description" maxlength="250">
+                <small *ngIf="timeAddInternalCategoryForm.get('description').hasError('whitespace') && timeAddInternalCategoryForm.get('description').touched"
+                  class="d-block text-danger">
+                  Please enter valid data
+                </small>
+              </div>
+              <div class="cockpit-body-cell category-col" *ngIf="showAddCategoryFields">
+                <select class="select-field" formControlName="categoryId" [ngClass]="{'placeholder': !timeAddInternalCategoryForm.get('categoryId')?.value}">
+                  <option class="placeholder" value="null" *ngIf="!timeAddInternalCategoryForm.get('categoryId').value">Category</option>
+                  <option class="option" *ngFor="let category of categoryList" [value]="category.id">{{category.name}}</option>
+                </select>
+                <span class="ck ck-arrow_down"></span>
+                <small *ngIf="timeAddInternalCategoryForm.get('categoryId').hasError('required') && timeAddInternalCategoryForm.get('categoryId').touched"
+                  class="d-block text-danger">
+                  Category is required
+                </small>
+              </div>
+              <div class="cockpit-body-cell operations-col" *ngIf="showAddCategoryFields">
+                <button class="btn btn-outline-primary" [disabled]="!timeAddInternalCategoryForm.valid">Add</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="scroll-wrapper">
+          <div class="cockpit-table scroll-bar">
+            <form [formGroup]="timeInternalCategoryListForm">
+              <app-internal-category-list [parent]="timeInternalCategoryListForm" [categoryList]="categoryList" (deleteInternalCategory)="deleteInternalCategory($event)"
+                (editInternalCategory)="editInternalCategory($event)"></app-internal-category-list>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>

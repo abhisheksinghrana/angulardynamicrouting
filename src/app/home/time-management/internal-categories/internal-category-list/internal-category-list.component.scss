@@ -1,0 +1,55 @@
+@import '~assets/scss/_common';
+
+.cockpit-table-row {
+  width: 100%;
+}
+
+.cockpit-body-cell {
+  padding: 13px 20px 13px 0;
+
+  input {
+    width: 100%;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+.internal-col {
+  @include text-truncate();
+  width: 20%;
+}
+
+.description-col {
+  @include text-truncate();
+  width: 54%;
+}
+
+.category-col {
+  width: 20%;
+  @include text-truncate();
+}
+
+.operations-col {
+  width: 6%;
+  padding-right: 0;
+  text-align: center;
+  color: $wolf-grey-color;
+
+  .ck {
+    cursor: pointer;
+    font-size: $x-medium-font;
+  }
+
+  .ck-edit {
+    margin-right: 5px;
+  }
+
+  .ck-cancel {
+    color: $red-color;
+    margin-right: 5px;
+  }
+
+  .ck-tick {
+    color: $jungle-green-color;
+  }
+}

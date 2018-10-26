@@ -1,0 +1,6 @@
+<form [formGroup]="parent" *ngIf="parent">
+  <label class="ac-switch">
+    <input type="checkbox" [formControlName]="controlName">
+    <span class="ac-slider round" *ngIf="parent"></span>
+  </label>
+</form>

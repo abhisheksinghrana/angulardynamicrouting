@@ -1,0 +1,63 @@
+@import '~assets/scss/_common';
+
+.ac-switch {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 14px;
+  height: 10px;
+
+  input {
+    display: none;
+
+    &:checked + .ac-slider {
+      background-color: $secondary-color;
+
+      &:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+        left: -14px;
+      }
+    }
+
+    &:focus + .ac-slider {
+      box-shadow: 0 0 1px $primary-color;
+    }
+
+    &:disabled + .ac-slider {
+      cursor: default;
+    }
+  }
+}
+
+.ac-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $mouse-grey-color;
+  transition: 0.4s;
+
+  &:before {
+    position: absolute;
+    content: '';
+    height: 12px;
+    width: 12px;
+    left: 1px;
+    bottom: 0;
+    background-color: $white-color;
+    transition: 0.4s;
+    box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.3);
+  }
+
+  &.round {
+    border-radius: 11px;
+
+    &:before {
+      border-radius: 50%;
+    }
+  }
+}

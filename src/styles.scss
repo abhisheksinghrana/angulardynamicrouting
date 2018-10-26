@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+@import './assets/scss/_bootstrap';
+
+@import './assets/fonts/cockpit-icons';
+@import 'assets/scss/main';
+
+.loading-overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1100;
+  background: url('./assets/images/ajax-loader.gif') no-repeat 50% center;
+  background-color: rgba(255, 255, 255, 0.8);
+}

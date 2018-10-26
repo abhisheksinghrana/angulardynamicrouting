@@ -1,0 +1,72 @@
+@import '~assets/scss/_common', '~bootstrap/scss/functions',
+  '~bootstrap/scss/variables', '~bootstrap/scss/mixins';
+
+.internal-categories-section {
+  font-size: $medium-font;
+}
+
+.cockpit-table {
+  &.scroll-bar {
+    max-height: 500px;
+    overflow-y: auto;
+  }
+}
+
+.cockpit-header-cell {
+  padding-left: 0;
+}
+
+.cockpit-body-cell {
+  padding-left: 0;
+
+  input {
+    width: 100%;
+  }
+}
+
+.internal-col {
+  @include text-truncate();
+  width: 20%;
+}
+
+.description-col {
+  width: 54%;
+}
+
+.category-col {
+  width: 20%;
+  @include text-truncate();
+
+  select.select-field {
+    line-height: 1.55;
+  }
+}
+
+.operations-col {
+  width: 6%;
+  padding-right: 0;
+  text-align: center;
+}
+
+.add-internal-category-form {
+  min-height: 56px;
+
+  .operations-col {
+    .btn {
+      padding: 5px 15px;
+      float: right;
+
+      @include media-breakpoint-between(md, lg) {
+        padding: 5px 5px;
+      }
+    }
+
+    .btn-outline-primary {
+      cursor: pointer;
+    }
+
+    .btn-outline-primary[disabled] {
+      cursor: not-allowed;
+    }
+  }
+}

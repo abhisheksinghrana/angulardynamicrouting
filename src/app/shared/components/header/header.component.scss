@@ -1,0 +1,60 @@
+@import '~assets/scss/_common';
+
+.header-section {
+  height: 40px;
+  border-bottom: 1px solid $mouse-grey-color;
+  display: flex;
+}
+
+.left-section {
+  width: 15%;
+  border-right: 1px solid $mouse-grey-color;
+}
+
+.title {
+  @include text-truncate();
+  font-family: $font-header;
+  color: $primary-color;
+  font-weight: 400;
+  font-size: $large-font;
+  margin: 9px 0 9px 16px;
+}
+
+.right-section {
+  width: 85%;
+
+  .menu-list {
+    font-family: $font-header;
+    font-size: $x-medium-font;
+    display: flex;
+    color: $mole-grey-color;
+  }
+
+  .menu-item {
+    border-right: 1px solid $mouse-grey-color;
+    background-color: $dolfine-grey-color;
+    cursor: pointer;
+
+    &:hover {
+      color: $mole-grey-color;
+    }
+
+    .name {
+      @include text-truncate();
+      margin: 13px 16px 6px;
+      display: inline-flex;
+    }
+
+    &.active {
+      background-color: $white-color;
+      border-bottom: 3px solid $secondary-color;
+      cursor: unset;
+
+      .name {
+        font-weight: 500;
+        margin-bottom: 6px;
+        cursor: unset;
+      }
+    }
+  }
+}

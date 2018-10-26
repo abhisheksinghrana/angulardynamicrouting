@@ -1,0 +1,55 @@
+<!-- <section class="admin-right">
+  <article>
+    <h4 class="common-sub-header-title"> Add holiday</h4>
+    <form id="addHolidayForm" novalidate #addHolidayForm="ngForm" (ngSubmit)="submitAddHolidayForm(addHolidayForm)">
+      <div class="form-element-wrap full-width pd-r0" [class.input-filled]="addHolidayFormData.date">
+        <input id="holiday-date" type="text" name="holidayDate" class="calendar input-field" [value]="addHolidayFormData.date" (dateChange)="addHolidayFormData.date = $event"
+          [options]="datepickerOptions" jq-datepicker required readonly="readonly" />
+        <label class="input-label required" for="holidayDate">{{'dateLbl' | i18n}}</label>
+        <span class="custom-field-validation-error" [ngStyle]="{'display': addHolidayForm.submitted && !addHolidayFormData.date ? 'block': 'none'}">{{'dateLbl' | i18n}} {{'isRequiredLbl' | i18n}}</span>
+      </div>
+      <div class="form-element-wrap full-width pd-r0" [class.input-filled]="addHolidayFormData.occassion">
+        <input id="holidayOccassion" type="text" name="Name" class="input-field" [(ngModel)]="addHolidayFormData.occassion" required
+          #holidayOccassion="ngModel" />
+        <label class="input-label required" for="holidayOccassion">{{'occassionLbl' | i18n}}</label>
+        <span class="custom-field-validation-error" [ngStyle]="{'display': (holidayOccassion.errors?.required  && (holidayOccassion.touched || addHolidayForm.submitted)) ? 'block': 'none'}">{{'occassionLbl' | i18n}} {{'isRequiredLbl' | i18n}}</span>
+      </div>
+      <div class="button-wrap pd-tb10">
+        <input id="holidayResetBtn" type="button" class="cancel-button" name="holidayResetBtn" value="{{'resetBtn' | i18n}}" (click)="resetAddHolidayForm()">
+        <input id="holidaySaveBtn" type="submit" class="save-button" name="holidaySaveBtn" value="{{'saveBtn' | i18n}}" />
+      </div>
+      <div class="clearfix"></div>
+      <div class="form-element-wrap quarter-width" [class.input-filled]="holidayDetails.year">
+        <select id="year" name="year" class="input-field" [(ngModel)]="holidayDetails.year" (change)="getHolidays()">
+          <option *ngFor="let year of holidayDetails?.yearList" value="{{year}}">{{year}}</option>
+        </select>
+        <label class="input-label" for="year">{{'yearLbl' | i18n}}</label>
+      </div>
+      <table class="table full-width">
+        <thead class="table-header">
+          <tr>
+            <th>
+              {{'occassionLbl' | i18n}}
+            </th>
+            <th>
+              {{'dateLbl' | i18n}}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let holiday of holidayList;let index = index; trackBy:index">
+            <td>
+              {{holiday.occassion}}
+            </td>
+            <td>
+              {{holiday.date | datex: 'DD-MMM-YYYY'}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="no-data-found" *ngIf="!holidayList?.length">
+        {{'noRecordFoundMsg' | i18n}}
+      </div>
+    </form>
+  </article>
+</section> -->

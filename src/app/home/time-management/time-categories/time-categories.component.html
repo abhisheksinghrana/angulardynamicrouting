@@ -1,0 +1,50 @@
+<section class="categories-section">
+  <article class="content-header-section">
+    <h1 class="heading">Categories</h1>
+    <div class="row">
+      <div class="col-lg-6 col-md-12 col-sm-12">
+        <div class="cockpit-table">
+          <div class="cockpit-table-row">
+            <div class="cockpit-header-cell category-col" title="Category">Category</div>
+            <div class="cockpit-header-cell description-col" title="Description">Description</div>
+            <div class="cockpit-header-cell billable-col" title="Billable">Billable</div>
+            <div class="cockpit-header-cell operations-col">&nbsp;</div>
+          </div>
+          <div class="cockpit-table-row add-category-form">
+            <form [formGroup]="timeAddCategoryForm" (ngSubmit)="addCategory(timeAddCategoryForm)">
+              <div class="cockpit-body-cell category-col">
+                <input type="text" placeholder="Add category" formControlName="name" maxlength="50" (focus)="onAddCategoryFocus()">
+                <small *ngIf="timeAddCategoryForm.get('name').hasError('required') && timeAddCategoryForm.get('name').touched" class="d-block text-danger">
+                  Category is required
+                </small>
+                <small *ngIf="timeAddCategoryForm.get('name').hasError('whitespace') && timeAddCategoryForm.get('name').touched" class="d-block text-danger">
+                  Please enter valid data
+                </small>
+              </div>
+              <div class="cockpit-body-cell description-col" *ngIf="showAddCategoryFields">
+                <input type="text" placeholder="Description" formControlName="description" maxlength="250">
+                <small *ngIf="timeAddCategoryForm.get('description').hasError('whitespace') && timeAddCategoryForm.get('description').touched"
+                  class="d-block text-danger">
+                  Please enter valid data
+                </small>
+              </div>
+              <div class="cockpit-body-cell billable-col" *ngIf="showAddCategoryFields">
+                <app-toggle-button [parent]="timeAddCategoryForm" [controlName]="'isBillable'"></app-toggle-button>
+              </div>
+              <div class="cockpit-body-cell operations-col" *ngIf="showAddCategoryFields">
+                <button class="btn btn-outline-primary" [disabled]="!timeAddCategoryForm.valid">Add</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="scroll-wrapper">
+          <div class="cockpit-table scroll-bar">
+            <form [formGroup]="timeCategoryListForm">
+              <app-category-list [parent]="timeCategoryListForm" (deleteCategory)="deleteCategory($event)" (editCategory)="editCategory($event)"></app-category-list>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>

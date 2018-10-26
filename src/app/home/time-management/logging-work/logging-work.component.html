@@ -1,0 +1,45 @@
+<section class="logging-work-section">
+  <article>
+    <h1 class="heading">
+      Logging work - default settings
+    </h1>
+    <p>You can customize the view persented to your users when logging work.</p>
+    <hr />
+  </article>
+  <article class="content-body-section">
+    <form [formGroup]="loggingWorkForm">
+      <div class="row ">
+        <div class=" col-md-2 col-sm-4">
+          <label>Enable forecast</label>
+        </div>
+        <div class="col-md-1">
+          <app-toggle-button [parent]="loggingWorkForm" [controlName]="'isForecastEnable'" (change)="updateLoggingWork(true)"></app-toggle-button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 col-sm-4">
+          <label [ngClass]="{'disable': !loggingWorkForm.get('isForecastEnable').value}">Show forecast</label>
+        </div>
+        <div class=" col-md-1">
+          <app-toggle-button [parent]="loggingWorkForm" [controlName]="'isDisplayForecast'" (change)="updateLoggingWork()"></app-toggle-button>
+        </div>
+      </div>
+      <div class="row">
+        <div class=" col-md-2 col-sm-4">
+          <label>Show weekly off days</label>
+        </div>
+        <div class=" col-md-1">
+          <app-toggle-button [parent]="loggingWorkForm" [controlName]="'isDisplayWeekend'" (change)="updateLoggingWork()"></app-toggle-button>
+        </div>
+      </div>
+      <div class="row">
+        <div class=" col-md-2 col-sm-4">
+          <label>Show category </label>
+        </div>
+        <div class=" col-md-1">
+          <app-toggle-button [parent]="loggingWorkForm" [controlName]="'isDisplayCategory'" (change)="updateLoggingWork()"></app-toggle-button>
+        </div>
+      </div>
+    </form>
+  </article>
+</section>

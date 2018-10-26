@@ -1,0 +1,80 @@
+@import '~assets/scss/_common';
+
+.content-header-section,
+.content-body-section {
+  margin: 10px 0;
+}
+
+.content-heading {
+  font-family: $font-body;
+  position: relative;
+  color: $secondary-color;
+  font-size: $medium-font;
+  margin-bottom: 10px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.content-heading:after {
+  position: absolute;
+  margin-left: 15px;
+  background-color: $mouse-grey-color;
+  content: '';
+  height: 1px;
+  top: 50%;
+  width: 100%;
+}
+
+.left-section {
+  width: 100%;
+  float: left;
+  padding-right: 20px;
+  margin-top: 10px;
+
+  @media only screen and (min-width: 64.063em) {
+    width: 50%;
+  }
+}
+
+.right-section {
+  width: 100%;
+  float: left;
+  padding-left: 20px;
+  margin-top: 10px;
+
+  @media only screen and (min-width: 64.063em) {
+    width: 50%;
+  }
+}
+
+.working-hours-section {
+  .configure-working-hours-section {
+    margin-top: 20px;
+  }
+
+  .region-drpdwn {
+    width: 125px;
+  }
+
+  .week-start-at {
+    width: 25%;
+  }
+
+  .workdays {
+    width: 25%;
+
+    input {
+      width: 100%;
+    }
+  }
+
+  .week-days-off {
+    width: 100%;
+  }
+}
+
+.ck-arrow_down {
+  font-size: $xx-small-font;
+  margin-left: -15px;
+  color: $elephant-grey-color;
+}

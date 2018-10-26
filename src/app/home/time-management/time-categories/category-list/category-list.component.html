@@ -1,0 +1,23 @@
+<div [formGroup]="parent" *ngIf="parent">
+  <div [formGroup]="category" class="cockpit-table-row" *ngFor="let category of parent?.controls?.categoriesList?.controls; let index = index">
+    <div class="cockpit-body-cell category-col" [title]="category.get('name').value">
+      <span *ngIf="!category.edit">{{category.get('name').value}}</span>
+      <input type="text" placeholder="Add category" formControlName="name" maxlength="50" *ngIf="category.edit" [ngClass]="{'border-danger': category.get('name').hasError('required') || category.get('name').hasError('whitespace')}">
+    </div>
+    <div class="cockpit-body-cell description-col" [title]="category.get('description').value">
+      <span *ngIf="!category.edit">{{category.get('description').value}}</span>
+      <input type="text" placeholder="Description" formControlName="description" maxlength="250" *ngIf="category.edit" [ngClass]="{'border-danger': category.get('description').hasError('whitespace')}">
+    </div>
+    <div class="cockpit-body-cell billable-col">
+      <app-toggle-button [parent]="category" [controlName]="'isBillable'"></app-toggle-button>
+    </div>
+    <div class="cockpit-body-cell operations-col">
+      <span class="ck ck-edit" (click)="onEditCategory(category)" *ngIf="!category.edit"></span>
+      <span class="ck ck-trash" (click)="onDeleteCategory(category)" *ngIf="!category.edit"></span>
+      <span class="ck ck-cancel" (click)="onCancelEdit(category)" *ngIf="category.edit"></span>
+      <span class="ck ck-tick" (click)="onConfirmEdit(category, index)" *ngIf="category.edit"></span>
+    </div>
+    <app-confirmation-bar [title]="'Delete category ?'" (response)="onDeleteCategoryConfirmationResponse($event, category, index)"
+      *ngIf="category?.showDeleteCategoryConfirmationBar"></app-confirmation-bar>
+  </div>
+</div>

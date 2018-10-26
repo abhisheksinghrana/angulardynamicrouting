@@ -1,0 +1,42 @@
+.cockpit-tab {
+  font-family: $font-header;
+  padding-left: 5px;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 12px;
+    overflow: hidden;
+  }
+
+  li {
+    border-style: solid;
+    border-color: $mouse-grey-color;
+    background: none;
+    padding: 2px 5px;
+    border-width: 1px 1px 3px;
+    margin: 0 10px 0 0;
+    float: left;
+    position: relative;
+    top: 0;
+    white-space: nowrap;
+
+    a {
+      color: $elephant-grey-color;
+      padding: 0 0 $medium-font;
+      float: left;
+      font-size: $small-font;
+      text-decoration: none;
+      padding: 4px 5px;
+    }
+
+    &.active {
+      border-color: $mouse-grey-color $mouse-grey-color $primary-color;
+
+      a {
+        color: $mole-grey-color;
+        cursor: text;
+      }
+    }
+  }
+}

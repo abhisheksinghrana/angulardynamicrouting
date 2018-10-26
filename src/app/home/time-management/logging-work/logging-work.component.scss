@@ -1,0 +1,31 @@
+@import '~assets/scss/_common';
+
+.logging-work-section {
+  label {
+    font-size: $small-font;
+  }
+
+  hr {
+    border: none;
+    border-bottom: 1px solid $mouse-grey-color;
+    margin: 8px 0 0 0;
+  }
+
+  p {
+    margin: 0 0 15px 0;
+    font-size: $small-font;
+    color: $mole-grey-color;
+  }
+
+  label.disable {
+    color: $elephant-grey-color;
+  }
+
+  .row {
+    margin: 8px 0;
+  }
+}
+
+.content-body-section {
+  margin: 20px 0;
+}

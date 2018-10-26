@@ -1,0 +1,97 @@
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+@mixin box-shadow($top: 1px, $left: 1px, $blur: 2px, $spread: 2px, $color: rgba(170, 170, 170, 1), $inset:'') {
+  -webkit-box-shadow: $top $left $blur $spread $color #{$inset};
+  -moz-box-shadow: $top $left $blur $spread $color #{$inset};
+  box-shadow: $top $left $blur $spread $color #{$inset};
+}
+
+@mixin set-bg-color-and-hover($baseColor) {
+  background-color: $baseColor;
+
+  &:hover {
+    background-color: darken($baseColor, 5%);
+  }
+}
+
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin arrow-up($arrowBottomSize, $arrowSize, $arrowColor) {
+  width: 0;
+  height: 0;
+  border-left: $arrowSize solid transparent;
+  border-right: $arrowSize solid transparent;
+  border-bottom: $arrowBottomSize solid $arrowColor;
+}
+
+@mixin arrow-down($arrowTopSize, $arrowSize, $arrowColor) {
+  width: 0;
+  height: 0;
+  border-left: $arrowSize solid transparent;
+  border-right: $arrowSize solid transparent;
+  border-top: $arrowTopSize solid $arrowColor;
+}
+
+@mixin user-select() {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@mixin appearance() {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+@mixin transform($transforms) {
+  -moz-transform: $transforms;
+  -o-transform: $transforms;
+  -ms-transform: $transforms;
+  -webkit-transform: $transforms;
+  transform: $transforms;
+}
+
+@mixin scale ($scale) {
+  -moz-transform: scale($scale);
+  -ms-transform: scale($scale);
+  -o-transform: scale($scale);
+}
+
+@mixin translate3d ($x, $y: 0, $z: 0) {
+  -webkit-transform: translate3d($x, $y, $z);
+  -moz-transform: translate3d($x, $y, $z);
+  -ms-transform: translate3d($x, $y, $z);
+  -o-transform: translate3d($x, $y, $z);
+}
+
+@mixin transform-origin ($x: center, $y:center) {
+  -webkit-transform-origin: $x $y;
+  -moz-transform-origin: $x $y;
+  -ms-transform-origin: $x $y;
+  -o-transform-origin: $x $y;
+}
+
+@mixin border-radius($radius) {
+  border-radius: $radius;
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+}

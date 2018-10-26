@@ -1,0 +1,44 @@
+<section class="working-hours-section">
+  <section class="content-header-section">
+    <h1 class="heading">Work days</h1>
+    <select class="input-field region-drpdwn" [(ngModel)]="regionId" (change)="getRegionWiseData()">
+      <option value="" *ngIf="!regionId">Select region</option>
+      <option *ngFor="let region of regionList" [value]="region.id">{{region.name}}</option>
+    </select>
+    <span class="ck ck-arrow_down"></span>
+  </section>
+  <section class="content-body-section">
+    <article class="left-section">
+      <h2 class="content-heading">Configure working hours</h2>
+      <div class="configure-working-hours-section">
+        <form [formGroup]="generalSettingsForm" (ngSubmit)="onGeneralSettingsFormSubmit()">
+          <div class="form-element-wrap week-start-at" [class.input-filled]="generalSettingsForm.get('weekStartAt').value || generalSettingsForm.get('weekStartAt').value === 0">
+            <select name="weekStartAt" class="input-field" formControlName="weekStartAt">
+              <option value="" *ngIf="!generalSettingsForm.get('weekStartAt').value && generalSettingsForm.get('weekStartAt').value != 0"></option>
+              <option *ngFor="let weekday of weekdaysList" [value]="weekday.id">{{weekday.text}}</option>
+            </select>
+            <label class="input-label required" for="weekStartAt">The week start at</label>
+            <span class="validation-error" [ngStyle]="{'display': (generalSettingsForm.get('weekStartAt').hasError('required') && (generalSettingsForm.get('weekStartAt').touched || isGeneralSettingsFormSubmitted)) ? 'block': 'none'}">Please select a value from dropdown</span>
+          </div>
+          <div class="clearfix"></div>
+          <div class="form-element-wrap workdays" [class.input-filled]="generalSettingsForm.get('workingHours').value || generalSettingsForm.get('workingHours').value === 0">
+            <input type="text" name="workingHours" formControlName="workingHours" max="24" maxlength="5" appOnlyNumber/>
+            <label class="input-label" for="workingHours">Hours on a workday</label>
+          </div>
+          <div class="form-element-wrap week-days-off" [class.input-filled]="daysList.length">
+            <ng-select [multiple]="true" [items]="weekdaysList" [active]="daysList" placeholder="Weekly off days" (data)="refreshWeekdayDropdown($event)"></ng-select>
+          </div>
+
+          <div class="clearfix"></div>
+          <div class="button-wrap">
+            <input type="button" value="Reset" name="cwhresetBtn" class="cancel-button" (click)="resetGeneralSettingsForm()" />
+            <input type="submit" value="Save" name="cwhSaveBtn" class="save-button" />
+          </div>
+        </form>
+      </div>
+    </article>
+    <article class="right-section">
+      <!-- <h2 class="content-heading">Holiday leaves</h2> -->
+    </article>
+  </section>
+</section>
