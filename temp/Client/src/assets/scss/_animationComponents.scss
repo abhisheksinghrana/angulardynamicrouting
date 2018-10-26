@@ -1,0 +1,413 @@
+.animation-form {
+  .form-element-wrap {
+    position: relative;
+    min-height: 37px;
+  }
+
+  .input-field {
+    padding: 2px 0;
+    margin: 0;
+    height: auto;
+  }
+
+  .input-field {
+    font-family: $font-body;
+    @include appearance();
+    font-weight: 400;
+    width: 100%;
+    border-width: 0 0 1px;
+    border-style: solid;
+    border-color: $elephant-grey-color;
+    font-size: $small-font;
+    line-height: 1.3;
+
+    &:focus {
+      border-bottom: 1px solid $primary-color;
+    }
+
+    &:disabled {
+      background: $white-color;
+      border-bottom: 1px solid $mouse-grey-color;
+      color: $mouse-grey-color;
+    }
+
+    &:disabled + .input-label {
+      opacity: 0.5;
+    }
+  }
+
+  .input-field.disabled-field:read-only {
+    background: $white-color;
+    border-bottom: 1px solid $mouse-grey-color;
+    color: $mouse-grey-color;
+  }
+
+  .label-text {
+    color: $elephant-grey-color;
+    text-align: left;
+    font-size: $small-font;
+    padding: 5px 5px 0 0;
+    float: left;
+  }
+
+  .input-label {
+    color: $elephant-grey-color;
+    font-weight: 400;
+    position: absolute;
+    left: 0;
+    text-align: left;
+    font-size: $small-font;
+    padding: 4px 0 5px;
+    pointer-events: none;
+    transform-origin: left top;
+    transition: 240ms;
+    transform: translate3d(0, 0, 0) scale(1);
+    top: 0;
+  }
+
+  .required:after {
+    content: '*';
+    margin-left: 3px;
+  }
+
+  .input-filled .input-label {
+    transform: translate3d(0, -10px, 0) scale(0.75);
+  }
+
+  .input-field:focus + .input-label + .mandate-star,
+  .input-field:focus + .input-label + .mandate-star {
+    color: $primary-color;
+  }
+
+  .input-field,
+  select {
+    &:focus + .input-label {
+      transform: translate3d(0, -10px, 0) scale(0.75);
+      color: $primary-color;
+    }
+  }
+
+  // Select box common styling
+
+  .select-wrap {
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+  }
+
+  select.select-field {
+    font-family: $font-body;
+    @include text-truncate();
+    @include appearance();
+    width: 100%;
+    border-width: 0 0 1px;
+    border-style: solid;
+    border-color: $elephant-grey-color;
+    color: $mole-grey-color;
+    line-height: normal;
+    cursor: pointer;
+    padding-right: 22px;
+    background-color: transparent;
+    padding-left: 0px;
+    font-size: inherit;
+    font-weight: 400;
+
+    &:focus {
+      border-bottom: 1px solid $primary-color;
+    }
+
+    &:disabled {
+      background: $white-color;
+      border-bottom: 1px solid $mouse-grey-color;
+      color: $mouse-grey-color;
+    }
+
+    &:disabled + .input-label {
+      opacity: 0.5;
+    }
+
+    &.placeholder,
+    option {
+      &.option {
+        color: $mole-grey-color;
+      }
+
+      &.placeholder {
+        color: $elephant-grey-color;
+      }
+    }
+  }
+
+  select.select-field + .ck-arrow_down {
+    font-size: $x-small-font;
+    margin-left: -20px;
+    color: $mole-grey-color;
+  }
+
+  select::-ms-expand {
+    display: none;
+  }
+
+  // Style for Radio button - Outer element should have a class radio-wrap and there should be an extra div to style radio button
+
+  .radio-wrap {
+    position: relative;
+    color: $mole-grey-color;
+    padding: 2px 0;
+
+    &:hover {
+      label {
+        color: $primary-color;
+      }
+
+      .virtual-radio-button {
+        border: 2px solid $primary-color;
+      }
+    }
+  }
+
+  .radio-box-wrap {
+    @include clearfix();
+
+    .radio-wrap {
+      float: left;
+      margin-right: 20px;
+    }
+  }
+
+  input[type='radio'] {
+    visibility: hidden;
+    position: absolute;
+  }
+
+  input[type='radio'] + label {
+    @include transition(all 0.25s linear);
+    line-height: 1.7;
+    display: block;
+    position: relative;
+    font-weight: 500;
+    font-size: $small-font;
+    padding: 0 0 0 18px;
+    z-index: 9;
+    cursor: pointer;
+  }
+
+  input[type='radio']:checked ~ label {
+    color: $primary-color;
+  }
+
+  input[type='radio']:disabled ~ label {
+    color: $mouse-grey-color;
+    cursor: default;
+  }
+
+  // Style for checkbox
+
+  input[type='checkbox'] {
+    display: none;
+  }
+
+  input[type='checkbox'] + label,
+  input[type='checkbox'] + input[type='hidden'] + label,
+  input[type='checkbox']
+    + input[type='hidden']
+    + .field-validation-valid
+    + label {
+    // @extend .cockpit-sprite-icon;
+    background-position: -4px -19151px;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    padding-left: 24px;
+    min-height: 16px;
+    line-height: 1.1;
+    width: auto;
+    cursor: pointer;
+    color: $mole-grey-color;
+    font-size: $small-font;
+
+    &:hover {
+      background-position: -4px -19267px;
+    }
+  }
+
+  input[type='checkbox']:checked + label,
+  input[type='checkbox']:checked + input[type='hidden'] + label,
+  input[type='checkbox']:checked
+    + input[type='hidden']
+    + .field-validation-valid
+    + label {
+    background-position: -4px -19383px;
+  }
+
+  input[type='checkbox']:checked:disabled + label,
+  input[type='checkbox']:checked:disabled + input[type='hidden'] + label,
+  input[type='checkbox']:checked:disabled
+    + input[type='hidden']
+    + .field-validation-valid
+    + label {
+    background-position: -4px -19501px;
+    cursor: default;
+  }
+
+  input[type='checkbox']:disabled + label {
+    background-position: -4px -19501px;
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  // Style for button
+
+  .button-wrap {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .field-validation-error,
+  .custom-field-validation-error {
+    padding: 1px 6px 2px;
+    margin: 0;
+    color: #fff;
+    border: 1px solid rgba(198, 15, 19, 0.6);
+    background-color: rgba(240, 99, 99, 0.75);
+    font-size: $small-font;
+    font-weight: 400;
+    position: absolute;
+    z-index: 100;
+    left: 0;
+    top: 22px;
+  }
+
+  .input-validation-error,
+  input.input-validation-error,
+  textarea.input-validation-error {
+    border-color: #c60f13;
+  }
+
+  .save-success {
+    background: #01bf1b;
+    padding: 7px;
+    color: $white-color;
+    clear: both;
+    width: auto;
+    float: left;
+    font-size: $small-font;
+  }
+
+  // Input box without animation
+
+  input[type='text'],
+  input[type='time'],
+  input[type='date'] {
+    font-family: $font-body;
+    border-width: 0 0 1px;
+    border-color: $elephant-grey-color;
+    outline: none;
+    font-size: $small-font;
+    padding: 2px 0;
+
+    &:focus {
+      background-color: $white-color;
+      border-color: $primary-color;
+      box-shadow: none;
+    }
+
+    &:hover {
+      border-color: $primary-color;
+    }
+
+    &[disabled] {
+      background-color: $white-color;
+      color: $elephant-grey-color;
+      border-color: $mouse-grey-color;
+    }
+
+    &.required {
+      border-color: $red-color;
+    }
+
+    &.error {
+      border-color: $red-color;
+    }
+
+    &::-ms-clear {
+      display: none;
+    }
+
+    &.attention {
+      border-color: $primary-color;
+    }
+  }
+
+  // Upload Image Styling
+
+  input[type='file'] {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+
+  input[type='file'] + label {
+    @include text-truncate();
+    display: inline-block;
+    width: 100%;
+    white-space: nowrap;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+
+    span,
+    strong {
+      font-family: $font-body;
+      padding: 5px 10px;
+      font-weight: 400;
+    }
+
+    span {
+      width: calc(100% - 115px);
+      @include text-truncate();
+      border-width: 0 0 1px;
+      border-style: solid;
+      border-color: $elephant-grey-color;
+      display: block;
+      float: left;
+      white-space: nowrap;
+      padding: 9px 5px 8px;
+      font-size: $small-font;
+      min-height: 31px;
+    }
+
+    strong {
+      background-color: lighten($primary-color, 10%);
+      display: block;
+      float: right;
+      height: 100%;
+      color: $white-color;
+      font-size: $small-font;
+      width: 115px;
+      text-align: center;
+      padding: 9px 5px;
+    }
+  }
+
+  input[type='file']:focus + label {
+    background-color: #fbfbfd;
+    border-color: $primary-color;
+    box-shadow: none;
+
+    strong {
+      background-color: darken($primary-color, 10%);
+    }
+  }
+
+  input[type='file']:hover + label {
+    border-color: $mole-grey-color;
+
+    strong {
+      background-color: darken($primary-color, 10%);
+    }
+  }
+}

@@ -1,0 +1,31 @@
+.new-cockpit-table {
+  width: 100%;
+  overflow: hidden;
+}
+
+.new-cockpit-table-row {
+  @include clearfix();
+  position: relative;
+  display: flex;
+}
+
+.footer-row {
+  border-top: 1px solid $secondary-color;
+}
+
+.new-cockpit-header-cell {
+  font-family: $font-header;
+  font-size: $small-font;
+  border-bottom: 1px solid $secondary-color;
+  color: $mole-grey-color;
+  padding: 12px 8px;
+  font-weight: 500;
+}
+
+.new-cockpit-body-cell {
+  font-family: $font-body;
+  font-size: $small-font;
+  border-bottom: 1px solid $mouse-grey-color;
+  color: $mole-grey-color;
+  padding: 12px;
+}

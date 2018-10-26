@@ -1,0 +1,80 @@
+@import '~assets/scss/_common';
+
+.group-panel {
+  position: relative;
+}
+
+.content {
+  position: absolute;
+  width: 100%;
+  color: $wolf-grey-color;
+  border: 1px solid $mouse-grey-color;
+  z-index: 9;
+  background: $white-color;
+  font-size: $small-font;
+}
+
+.category-heading {
+  padding: 6px 6px;
+  font-weight: 600;
+  color: $mole-grey-color;
+}
+
+.item-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid $mouse-grey-color;
+}
+
+.item {
+  padding: 8px 6px;
+  border-bottom: 1px solid $mouse-grey-color;
+
+  &.no-selection {
+    color: $elephant-grey-color;
+  }
+}
+
+.inactive-list {
+  .item-list {
+    border-top: none;
+  }
+
+  .item {
+    border-bottom: none;
+  }
+}
+
+.container {
+  position: relative;
+  cursor: pointer;
+  padding-left: 25px;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.checkbox {
+  background: url('../../../../assets/images/checkbox.svg') no-repeat;
+  height: 16px;
+  width: 16px;
+}
+
+.ck-checkbox_empty {
+  color: $mouse-grey-color;
+  font-size: $medium-font;
+}
+
+.action-group {
+  float: right;
+  color: $wolf-grey-color;
+}
+
+.action {
+  margin: 0 3px;
+  cursor: pointer;
+}

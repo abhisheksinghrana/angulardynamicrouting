@@ -1,0 +1,59 @@
+@import '~bootstrap/scss/mixins';
+@import '~assets/scss/_common';
+
+.current-btn {
+  cursor: pointer;
+  margin-right: 10px;
+  font-weight: 600;
+  padding: 6px 8px;
+  border-radius: 2px;
+  font-size: $small-font;
+  border: 1px solid $mouse-grey-color;
+  background-color: $dolfine-grey-color;
+}
+
+.daterange {
+  display: inline-flex;
+}
+
+.ck-arrow_left,
+.ck-arrow_right {
+  cursor: pointer;
+  font-size: $xx-small-font;
+  padding: 8px 9px 10px;
+  border: 1px solid $mouse-grey-color;
+  background-color: $dolfine-grey-color;
+}
+
+.ck-arrow_left {
+  border-radius: 1px 0 0 1px;
+}
+
+.ck-arrow_right {
+  border-radius: 0 1px 1px 0;
+}
+
+.disabled {
+  cursor: not-allowed;
+  color: $mouse-grey-color;
+}
+
+.date {
+  position: relative;
+  padding: 3px 11px 5px;
+  border: 1px solid $mouse-grey-color;
+  font-size: $medium-font;
+  display: inline-block;
+  width: 180px;
+}
+
+.ck-calendar {
+  position: absolute;
+  bottom: 7px;
+}
+
+label {
+  font-size: $small-font;
+  margin-left: 26px;
+  color: $mole-grey-color;
+}

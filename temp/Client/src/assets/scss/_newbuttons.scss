@@ -1,0 +1,108 @@
+.ac-button {
+  @include transition(all 0.3s ease-in);
+  border-radius: 2px;
+  font-size: 14px;
+  font-family: $font-header;
+  font-weight: 400;
+  background: $white-color;
+  cursor: pointer;
+
+  &:focus,
+  &:active {
+    box-shadow: none;
+    outline: none;
+  }
+
+  &:not(:first-of-type):not(:last-of-type) {
+    margin: 0 4px;
+  }
+
+  &:first-of-type {
+    margin-right: 4px;
+  }
+
+  &:last-of-type {
+    margin-left: 4px;
+  }
+}
+
+.ac-primary {
+  border: 1px solid $primary-color;
+  padding: 0px 16px;
+  color: $mole-grey-color;
+  height: 35px;
+
+  &.ac-small {
+    padding: 0px 8px;
+    height: 25px;
+  }
+
+  &:hover {
+    background-color: $primary-color;
+    color: $white-color;
+  }
+
+  &:disabled {
+    border-color: rgba(20, 0, 155, 0.15);
+    color: $elephant-grey-color;
+    cursor: default;
+    &:hover {
+      background-color: $white-color;
+    }
+  }
+}
+
+.ac-secondary {
+  border: 1px solid $mouse-grey-color;
+  padding: 0px 16px;
+  color: $mole-grey-color;
+  height: 35px;
+
+  &.ac-small {
+    padding: 0px 8px;
+    height: 25px;
+  }
+
+  &:hover {
+    background-color: $mouse-grey-color;
+    color: $mole-grey-color;
+  }
+
+  &:disabled {
+    border-color: $mouse-grey-color;
+    color: $elephant-grey-color;
+    cursor: default;
+
+    &:hover {
+      background-color: $white-color;
+    }
+  }
+}
+
+.ac-alternate {
+  border: 1px solid $elephant-grey-color;
+  padding: 0px 16px;
+  color: $mole-grey-color;
+  height: 35px;
+  background-color: $dolfine-grey-color;
+
+  &.ac-small {
+    padding: 0px 8px;
+    height: 25px;
+  }
+
+  &:hover {
+    background-color: $mouse-grey-color;
+    color: $mole-grey-color;
+  }
+
+  &:disabled {
+    border-color: $mouse-grey-color;
+    color: $elephant-grey-color;
+    cursor: default;
+
+    &:hover {
+      background-color: $dolfine-grey-color;
+    }
+  }
+}

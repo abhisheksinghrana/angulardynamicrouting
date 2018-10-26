@@ -1,0 +1,32 @@
+@import '~assets/scss/_common';
+
+.input-group {
+  position: relative;
+  margin: 8px 0px 5px;
+}
+
+.calendar-icon {
+  position: absolute;
+  left: 5px;
+  z-index: 9999;
+  color: $mole-grey-color;
+  padding: 1px 5px;
+}
+
+.uneditable-input {
+  font-family: $font-body;
+  color: $mole-grey-color;
+  border: 1px solid $mouse-grey-color;
+  border-bottom: 1px solid $elephant-grey-color;
+  border-radius: 0;
+  font-size: $small-font;
+  min-height: 30px;
+  padding: 7px 20px 5px 30px;
+
+  &:hover {
+    cursor: pointer;
+  }
+  &.focus {
+    border-bottom: 2px solid $primary-color;
+  }
+}

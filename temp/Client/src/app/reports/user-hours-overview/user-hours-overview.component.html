@@ -1,0 +1,133 @@
+<section class="user-hours-overview-section">
+  <div class="row report-filters">
+    <div class="user-search-dropdown" (clickOutside)="resetUserSearchPanel()">
+      <div class="panel-dropdown-view-selector" [ngClass]="{'border-bottom-secondary-color': showUserSearchPanelDetails?.showPanel}"
+        (click)="onUserDropdownClick()">
+        <div class="content">
+          <span class="item-user-image">
+            <img src="{{env?.deployUrl}}/assets/images/default_user.png" alt="" *ngIf="!selectedUserDetail?.profileImageUrl" />
+            <img src="{{selectedUserDetail?.profileImageUrl}}" alt="" *ngIf="selectedUserDetail?.profileImageUrl" />
+          </span>
+          <span class="name" title="Select User/Level" *ngIf="!selectedUserDetail?.id && !selectedLevelDetail?.id">Select
+            User/Level</span>
+          <span class="name" title="{{selectedUserDetail?.fullName}}" *ngIf="selectedUserDetail?.id">{{selectedUserDetail?.fullName}}</span>
+          <span class="name" title="{{selectedLevelDetail?.name}}" *ngIf="selectedLevelDetail?.id">{{selectedLevelDetail?.name}}</span>
+        </div>
+        <div class="ck ck-arrow_down"></div>
+      </div>
+      <div class="search-panel" *ngIf="showUserSearchPanelDetails?.showPanel">
+        <div class="tab-panel">
+          <div class="tab" [ngClass]="{'active': showUserSearchPanelDetails?.type === userSearchPanelType?.user}" (click)="onUserSearchTabSelection(userSearchPanelType?.user)">User</div>
+          <div class="tab" [ngClass]="{'active': showUserSearchPanelDetails?.type === userSearchPanelType?.level}" (click)="onUserSearchTabSelection(userSearchPanelType?.level, tree)">Level</div>
+        </div>
+        <app-user-search (getSearchListEmitter)="getUserList($event)" (getRecentSearchListEmitter)="getRecentUserSearchList($event)"
+          (onItemSelectionEmitter)="onUserSelection($event)" [searchDefaultParams]="userSearchParams" [searchList]="userSearchList"
+          [recentSearchList]="recentUserSearchList" *ngIf="showUserSearchPanelDetails?.type === userSearchPanelType?.user"></app-user-search>
+        <div class="customTree" [hidden]="showUserSearchPanelDetails?.type !== userSearchPanelType?.level">
+          <div class="search-box">
+            <input id="filter" #filter (keyup)="tree.treeModel.filterNodes(filter.value, true)" placeholder="Search" class="tree-filter"
+            />
+            <span class="ck ck-search"></span>
+          </div>
+          <perfect-scrollbar class="scroller">
+            <tree-root #tree [nodes]="organizationLevelList" [focused]="true">
+              <ng-template #treeNodeTemplate let-node let-index="index">
+                <span class="name" (click)="onLevelSelection(node)" [title]="node?.data?.name">{{node?.data?.name}}</span>
+              </ng-template>
+            </tree-root>
+          </perfect-scrollbar>
+        </div>
+      </div>
+    </div>
+    <div class="date-range-control">
+      <app-date-range (dateRangeSelected)="selectedDateRange($event)" [defaultDate]="datepickerRange"></app-date-range>
+    </div>
+    <div class="group-by-control" (clickOutside)="resetGroupByUserPanel()">
+      <div class="panel-dropdown-view-selector" [ngClass]="{'border-bottom-secondary-color': showGroupByUserPanel}" (click)="onGroupByUserDropdownClick()">
+        <div class="content">
+          <span class="group-by">Group by:</span>
+          <span [title]="activeGroupByListString">
+            {{activeGroupByListString}}
+          </span>
+        </div>
+        <div class="ck ck-arrow_down"></div>
+      </div>
+      <app-group-preferences (updateGroupByPreferenceListEmitter)="updateGroupByPreferenceList($event)" [activeGroupByList]="activeGroupByList"
+        [inactiveGroupByList]="inactiveGroupByList" *ngIf="showGroupByUserPanel"></app-group-preferences>
+    </div>
+    <div class="generate-report-btn">
+        <button class="ac-button ac-primary" (click)="getUserHoursReport()">Generate report</button>
+        <button class="ac-button ac-primary" (click)="generateUserHoursReport()" *ngIf="worklogDetails?.report?.length">Save as PDF</button>
+    </div>
+  </div>
+  <div class="user-hours-report-table" *ngIf="worklogDetails?.report?.length">
+    <div class="row-wrapper">
+      <div class="work-item-section">
+        <div class="new-cockpit-table">
+          <div class="new-cockpit-table-row header-row">
+            <div class="new-cockpit-header-cell worklog-col">
+              <span [title]="activeGroupByListString">{{activeGroupByListString}}</span>
+            </div>
+            <div class="new-cockpit-header-cell sum-col">
+              <span title="Sum">Sum</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hours-section hours-section-header" #headerScroll>
+        <div class="new-cockpit-table">
+          <div class="new-cockpit-table-row">
+            <div class="new-cockpit-header-cell hours-col">
+              <div class="columns" *ngFor="let item of worklogDetails?.summary">
+                <div class="day">{{item?.date | date:'EEEEEE'}}</div>
+                <div class="date">{{item?.date | date:'d'}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <perfect-scrollbar class="scroll-wrapper">
+      <div class="row-wrapper">
+        <div class="work-item-section">
+          <div class="new-cockpit-table">
+            <app-work-item [worklogDetails]="worklog" [level]="1" *ngFor="let worklog of worklogDetails?.report"></app-work-item>
+          </div>
+        </div>
+        <div class="hours-section hours-section-body" #bodyScroll>
+          <div class="new-cockpit-table">
+            <app-work-item-hours [worklogDetails]="worklog" *ngFor="let worklog of worklogDetails?.report"></app-work-item-hours>
+          </div>
+        </div>
+      </div>
+    </perfect-scrollbar>
+    <div class="row-wrapper">
+      <div class="work-item-section">
+        <div class="new-cockpit-table">
+          <div class="new-cockpit-table-row footer-row">
+            <div class="new-cockpit-body-cell worklog-col"></div>
+            <div class="new-cockpit-body-cell sum-col">
+              <span [title]="worklogDetails?.totalSpent">{{worklogDetails?.totalSpent + 'h'}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hours-section hours-section-footer">
+        <perfect-scrollbar (psScrollX)="onScrollXAxisEvent($event)">
+          <div class="new-cockpit-table">
+            <div class="new-cockpit-table-row footer-row">
+              <div class="new-cockpit-body-cell hours-col">
+                <div class="columns" *ngFor="let item of worklogDetails?.summary">
+                  <span [title]="item?.spent">{{item?.spent}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </perfect-scrollbar>
+      </div>
+    </div>
+  </div>
+  <div class="no-record-found-section" *ngIf="!worklogDetails?.report?.length">
+    <app-no-record-found [title]="noRecordFoundData?.title" [description]="noRecordFoundData?.description"></app-no-record-found>
+  </div>
+</section>

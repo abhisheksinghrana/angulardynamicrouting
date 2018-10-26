@@ -1,0 +1,45 @@
+@import '~bootstrap/scss/mixins';
+@import '~assets/scss/_common';
+
+.reports-section {
+  height: 100%;
+}
+
+.left-section {
+  width: 15%;
+  float: left;
+  height: 100%;
+  border-right: 1px solid $mouse-grey-color;
+
+  .menu-list {
+    color: $wolf-grey-color;
+    font-size: $small-font;
+    padding: 15px 15px;
+  }
+
+  .menu-item {
+    margin: 0 15px 5px 0;
+    cursor: pointer;
+    @include text-truncate();
+
+    a {
+      color: $wolf-grey-color;
+    }
+
+    &.active {
+      a {
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+.right-section {
+  width: 85%;
+  float: left;
+  height: 100%;
+
+  .content {
+    margin: 20px;
+  }
+}

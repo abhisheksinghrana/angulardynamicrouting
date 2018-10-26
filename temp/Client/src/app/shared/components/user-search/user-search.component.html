@@ -1,0 +1,27 @@
+<div class="search-panel">
+  <div class="search-box">
+    <input type="text" placeholder="Search" [(ngModel)]="searchParams.searchText" (ngModelChange)="onSearchTextChange()" />
+    <span class="ck ck-search"></span>
+  </div>
+  <perfect-scrollbar class="content">
+    <div class="recent-search-list">
+      <div class="recent-search-text">Recent search</div>
+      <div class="item" *ngFor="let item of recentSearchList;trackBy:trackByFn" (click)="onItemSelection(item)">
+        <span class="item-user-image">
+          <img [src]="item?.profileImageUrl" alt="" />
+        </span>
+        <span class="text">{{item?.fullName}}</span>
+      </div>
+      <div *ngIf="!recentSearchList?.length" class="no-recent-search-found">No recent search found</div>
+    </div>
+    <hr *ngIf="searchList?.length">
+    <div class="users-list">
+      <div class="item" *ngFor="let item of searchList;trackBy:trackByFn" (click)="onItemSelection(item)">
+        <span class="item-user-image">
+          <img [src]="item?.profileImageUrl" alt="" />
+        </span>
+        <span class="text">{{item?.fullName}}</span>
+      </div>
+    </div>
+  </perfect-scrollbar>
+</div>

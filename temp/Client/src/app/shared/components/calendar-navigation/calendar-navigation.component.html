@@ -1,0 +1,12 @@
+<div class="calendar-navigation-container">
+  <span class="current-btn" (click)="handleClick(true)" [ngClass]="{'disabled': disabled}">Current</span>
+  <div class="daterange">
+    <span class="ck ck-arrow_left" [ngClass]="{'disabled': !details?.isPreviousActive || disabled}" (click)="handleClick(details?.isPreviousActive, weekActionType?.previous, details?.startDate)"></span>
+    <span class="date">
+      <i class="ck ck-calendar" [ngClass]="{'disabled': disabled}"></i>
+      <label *ngIf="details?.startDate && details?.endDate">{{details?.startDate | date:'d LLL'}} - {{details?.endDate |
+        date:'d LLL y'}}</label>
+    </span>
+    <span class="ck ck-arrow_right" [ngClass]="{'disabled': !details?.isNextActive || disabled}" (click)="handleClick(details?.isNextActive, weekActionType?.next, details?.startDate)"></span>
+  </div>
+</div>

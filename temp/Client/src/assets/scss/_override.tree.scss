@@ -1,0 +1,96 @@
+.customTree {
+  font-family: $font-body;
+  font-size: $small-font;
+  min-width: 260px;
+  max-width: 320px;
+  overflow: auto;
+  padding: 8px;
+
+  .scroller {
+    min-height: 280px;
+    max-height: 280px;
+    padding-right: 20px;
+  }
+
+  .search-box {
+    display: flex;
+    width: 100%;
+    border: 1px solid $mouse-grey-color;
+    padding: 2px 4px;
+    line-height: 24px;
+    border-radius: 2px;
+
+    .tree-filter {
+      font-family: $font-body;
+      font-size: $small-font;
+      flex: 1;
+      border: none;
+      padding: 0 1px;
+    }
+
+    .ck-search {
+      flex: 0;
+      vertical-align: middle;
+      border: 1px solid $secondary-color;
+      border-radius: 4px;
+      padding: 4px;
+      color: $secondary-color;
+    }
+  }
+
+  .angular-tree-component {
+    margin-top: 6px;
+  }
+
+  tree-viewport {
+    height: 100%;
+    overflow: hidden;
+
+    .node-wrapper {
+      margin: 0;
+      line-height: 2px;
+
+      .toggle-children-wrapper {
+        padding: 0;
+        line-height: 18px;
+      }
+
+      .toggle-children {
+        vertical-align: bottom;
+      }
+    }
+
+    .toggle-children {
+      background-image: url('./assets/images/arrow_right.svg');
+      height: 9px;
+      width: 9px;
+    }
+
+    .node-content-wrapper {
+      @include text-truncate();
+      min-width: 120px;
+      padding: 0 4px;
+      margin: 0;
+      line-height: 22px;
+      border: 1px solid transparent;
+      height: 24px;
+      border-radius: 0;
+
+      &:active,
+      &:focus,
+      &:hover {
+        background: none;
+        border: 1px solid $red-color;
+        box-shadow: none;
+      }
+
+      &.node-content-wrapper-focused {
+        background: none;
+        border: none;
+        box-shadow: none;
+        font-weight: bold;
+        color: $ac-blue-color;
+      }
+    }
+  }
+}

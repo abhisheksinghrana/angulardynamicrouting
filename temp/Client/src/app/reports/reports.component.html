@@ -1,0 +1,14 @@
+<article class="reports-section">
+  <div class="left-section">
+    <div class="menu-list">
+      <div class="menu-item" [title]="menu?.name" routerLinkActive="active" *ngFor="let menu of menuList">
+        <a [routerLink]="menu?.route">{{menu?.name}}</a>
+      </div>
+    </div>
+  </div>
+  <div class="right-section">
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</article>

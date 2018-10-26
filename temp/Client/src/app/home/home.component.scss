@@ -1,0 +1,13 @@
+@import '~assets/scss/_common';
+
+.content-container {
+  width: 100%;
+  height: calc(100% - 20px);
+  padding: 0;
+  line-height: normal;
+}
+
+.cockpit-tab-content {
+  height: 100%;
+  font-size: $small-font;
+}

@@ -1,0 +1,627 @@
+@import '~bootstrap/scss/functions', '~bootstrap/scss/variables',
+  '~bootstrap/scss/mixins', '~assets/scss/_common';
+
+.timesheet-section {
+  margin: 0 20px;
+  color: $mole-grey-color;
+}
+
+.filter-section {
+  margin-top: 20px;
+
+  .current-btn {
+    cursor: pointer;
+    margin-right: 10px;
+    font-weight: 600;
+    padding: 6px 8px;
+    border-radius: 2px;
+    font-size: $small-font;
+    border: 1px solid $mouse-grey-color;
+    background-color: $dolfine-grey-color;
+  }
+
+  .left-section {
+    margin-right: auto;
+  }
+
+  .right-section {
+    .ck-more {
+      margin: 5px 0;
+      cursor: pointer;
+      font-size: $medium-font;
+
+      &:after {
+        display: none;
+      }
+    }
+  }
+
+  .daterange-container {
+    display: inline-flex;
+  }
+
+  .ck-arrow_left,
+  .ck-arrow_right {
+    cursor: pointer;
+    font-size: $xx-small-font;
+    padding: 8px 9px 10px;
+    border: 1px solid $mouse-grey-color;
+    background-color: $dolfine-grey-color;
+  }
+
+  .ck-arrow_left {
+    border-radius: 1px 0 0 1px;
+  }
+
+  .ck-arrow_right {
+    border-radius: 0 1px 1px 0;
+  }
+
+  .disabled {
+    cursor: not-allowed;
+    color: $mouse-grey-color;
+  }
+
+  .date-range {
+    position: relative;
+    padding: 3px 11px 5px;
+    border: 1px solid $mouse-grey-color;
+    font-size: $medium-font;
+    display: inline-block;
+    width: 180px;
+  }
+
+  .ck-calendar {
+    position: absolute;
+    bottom: 7px;
+  }
+
+  .details {
+    font-size: $small-font;
+    margin-left: 26px;
+    color: $mole-grey-color;
+  }
+}
+
+.timesheet-table-section {
+  margin-top: 15px;
+}
+
+.new-cockpit-body-cell {
+  padding: 8px;
+
+  .cell-label {
+    line-height: 2.3;
+    padding: 6px;
+  }
+}
+
+.scroll-wrapper {
+  max-height: 530px;
+  border-bottom: 1px solid $mouse-grey-color;
+}
+
+.sub-header-row {
+  border-bottom: none;
+  position: inherit;
+  color: $mole-grey-color;
+
+  .hours-col {
+    border-bottom: 1px solid $elephant-grey-color;
+
+    .add-btn {
+      font-family: $font-header;
+      font-size: $x-medium-font;
+      margin: 8px;
+      border: none;
+      padding: 0 12px;
+      height: 30px;
+      color: $mole-grey-color;
+      background: $dolfine-grey-color;
+      cursor: pointer;
+    }
+
+    .cancel-btn {
+      margin: 16px 2px 0;
+      font-size: $small-font;
+      cursor: pointer;
+      color: $elephant-grey-color;
+    }
+
+    &.normal-border {
+      border-color: $mouse-grey-color;
+    }
+  }
+}
+
+.work-col {
+  min-width: 24%;
+  max-width: 100%;
+  flex: 1 0;
+  text-align: left;
+  @include text-truncate();
+
+  .ck-note {
+    &:hover {
+      color: $primary-color;
+    }
+
+    &.filled {
+      color: $secondary-color;
+    }
+  }
+
+  input {
+    flex-grow: 1;
+    font-size: $small-font;
+    padding: 0;
+    line-height: 2.3;
+    margin-right: 5px;
+
+    &.log-work-input {
+      width: 40%;
+      flex-grow: 0;
+    }
+
+    &.border-color-blue {
+      border-color: $primary-color !important;
+    }
+
+    &.error {
+      border-bottom: 1px solid $red-color;
+    }
+  }
+
+  .content {
+    display: flex;
+
+    input,
+    label {
+      margin-right: 20px;
+      flex-grow: 1;
+      line-height: 2.3;
+    }
+
+    label {
+      @include text-truncate();
+    }
+
+    .work {
+      cursor: pointer;
+    }
+  }
+
+  .add-log-work {
+    display: flex;
+  }
+
+  .item-icon {
+    margin: 3px 10px 0px 0px;
+    font-size: $large-font;
+  }
+
+  .description {
+    cursor: pointer;
+    margin: 4px 10px 0px 0px;
+    font-size: 1.3rem;
+    background: none;
+    border: none;
+    padding: 0;
+    color: $elephant-grey-color;
+  }
+}
+
+.activity-col {
+  min-width: 11%;
+  max-width: 12%;
+  flex: 1 0;
+  @include text-truncate();
+}
+
+.project-col {
+  min-width: 11%;
+  max-width: 12%;
+  flex: 1 0;
+  @include text-truncate();
+}
+
+.project-col-dropdown,
+.activity-col-dropdown {
+  .id-col {
+    color: $secondary-color;
+  }
+
+  .scrollable-menu {
+    height: auto;
+    max-height: 180px;
+    overflow-x: hidden;
+  }
+}
+
+.level-col {
+  min-width: 8%;
+  max-width: 11%;
+  flex: 1 0;
+  @include text-truncate();
+
+  button {
+    background: none;
+    border: none;
+    color: $mole-grey-color;
+  }
+}
+
+.category-col {
+  min-width: 8%;
+  max-width: 11%;
+  flex: 1 0;
+  @include text-truncate();
+
+  .ck-dot {
+    font-size: 7px;
+  }
+
+  .label {
+    line-height: 2.3;
+    padding: 10px;
+
+    .text {
+      margin-left: 4px;
+    }
+  }
+
+  .selected-text {
+    font-size: $small-font;
+    position: relative;
+    margin-left: 6px;
+
+    .ck-dot {
+      position: absolute;
+      bottom: 10px;
+    }
+
+    .text {
+      margin: 0 2px 0 10px;
+    }
+  }
+}
+
+.hours-col {
+  min-width: 28%;
+  max-width: 35%;
+  flex: 0 0;
+  text-align: center;
+  display: flex;
+
+  &.error {
+    border-bottom-color: $red-color;
+  }
+
+  .hours-cell {
+    @include text-truncate();
+    height: 100%;
+    border-right: 1px solid $mouse-grey-color;
+    flex: 1 1 0;
+    position: relative;
+
+    &:first-child {
+      border-left: 1px solid $mouse-grey-color;
+    }
+
+    &.weekoffs {
+      background-color: $dolfine-grey-color;
+
+      .day,
+      .date {
+        color: $elephant-grey-color;
+      }
+
+      input[type='text'] {
+        background-color: $dolfine-grey-color;
+      }
+    }
+
+    .spent {
+      width: 45%;
+      vertical-align: super;
+      margin-top: 10px;
+    }
+
+    .slash {
+      height: 1px;
+      width: 32px;
+      background: $mouse-grey-color;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      transform: rotate(-45deg);
+    }
+
+    .forecast {
+      width: 45%;
+    }
+  }
+
+  &.new-cockpit-body-cell {
+    padding: 0;
+    color: $mole-grey-color;
+
+    .day {
+      margin: 6px 5px 3px;
+    }
+
+    .date {
+      margin: 3px 5px 6px;
+      font-weight: 600;
+    }
+
+    input[type='text'] {
+      width: 100%;
+      text-align: center;
+      font-size: $small-font;
+      color: $mole-grey-color;
+      border: none;
+    }
+
+    input:focus,
+    input:active {
+      background: $white-color;
+    }
+
+    input[disabled] {
+      font-size: $small-font;
+      color: $mole-grey-color;
+    }
+
+    label {
+      cursor: pointer;
+    }
+
+    &.enable {
+      padding: 0;
+    }
+  }
+}
+
+.total-col {
+  min-width: 6%;
+  max-width: 6%;
+  text-align: center;
+
+  &.new-cockpit-body-cell {
+    line-height: 2.3;
+  }
+}
+
+.operations-col {
+  min-width: 4%;
+  max-width: 4%;
+  padding-left: 0;
+
+  @include media-breakpoint-up(xl) {
+    min-width: 2%;
+    max-width: 2%;
+  }
+
+  .ck-trash {
+    color: $elephant-grey-color;
+    cursor: pointer;
+    line-height: 2.3;
+  }
+}
+
+.button-wrap {
+  margin-top: 20px;
+
+  .error-msg {
+    color: $red-color;
+    margin: 10px;
+  }
+}
+
+.timesheet-summary {
+  .hours-col {
+    border-top: 1px solid $elephant-grey-color;
+  }
+
+  .total-col {
+    font-weight: bold;
+    border: none;
+  }
+
+  .empty-cell {
+    padding: 15px 10px;
+  }
+
+  .hours-cell {
+    padding: 15px 10px;
+  }
+}
+
+.category-dropdown {
+  .scrollable-menu {
+    height: auto;
+    max-height: 190px;
+    overflow-x: hidden;
+  }
+
+  .dropdown-list {
+    .ck-dot {
+      font-size: 7px;
+      position: absolute;
+      bottom: 10px;
+    }
+
+    .text {
+      margin: 0 2px 0 12px;
+    }
+  }
+}
+
+.no-record-found-section {
+  margin: 80px auto 0 auto;
+  width: 400px;
+}
+
+.log-work-panel {
+  position: absolute;
+  z-index: 10;
+  background: $white-color;
+  border: 1px solid $mouse-grey-color;
+  border-top: none;
+}
+
+.tab-panel {
+  padding: 15px 0;
+  display: flex;
+  justify-content: center;
+
+  .tab {
+    padding: 5px 8px;
+    color: $elephant-grey-color;
+    background-color: $white-color;
+    border: 1px solid $mouse-grey-color;
+    font-size: $small-font;
+    cursor: pointer;
+
+    &.active {
+      color: $white-color;
+      background-color: $primary-color;
+      border-color: $primary-color;
+    }
+  }
+}
+
+.workitem-list {
+  .work-item-container,
+  .internal-item-container {
+    min-height: 30px;
+    max-height: 174px;
+  }
+
+  .item {
+    border-top: 1px solid $mouse-grey-color;
+    padding: 4px;
+    cursor: pointer;
+    line-height: 18px;
+    align-items: center;
+    font-size: $small-font;
+    padding-right: 14px;
+
+    &:hover {
+      background-color: $dolfine-grey-color;
+    }
+
+    &.load-more-data {
+      text-align: center;
+      cursor: default;
+    }
+  }
+
+  .work-item {
+    display: flex;
+
+    div {
+      flex: 0;
+    }
+
+    .item-icon {
+      margin: 0 5px 0 0px;
+      font-size: inherit;
+
+      i {
+        font-size: $medium-font;
+        line-height: 1px;
+      }
+    }
+
+    .item-id {
+      margin: 0 5px 0 2px;
+      flex-basis: 60px;
+      @include text-truncate();
+    }
+
+    .item-name {
+      margin: 0 5px;
+      flex: 1;
+      @include text-truncate();
+    }
+
+    .item-level {
+      border: 1px solid $elephant-grey-color;
+      border-left: 3px solid $ac-blue-color;
+      padding: 0 4px;
+      float: right;
+    }
+  }
+
+  .internal-item {
+    display: flex;
+
+    .item-icon {
+      margin: 0 5px 0 0px;
+      font-size: inherit;
+
+      i.ck {
+        font-size: $medium-font;
+        line-height: 1px;
+      }
+    }
+
+    .internal-name {
+      @include text-truncate();
+      width: 60%;
+    }
+
+    .category-name {
+      @include text-truncate();
+      width: 40%;
+      padding: 1px 0;
+      text-align: right;
+
+      i.ck-dot {
+        font-size: 7px;
+      }
+    }
+  }
+}
+
+.description-popover {
+  padding: 10px;
+  min-width: 250px;
+  min-height: 100px;
+
+  textarea {
+    font-family: $font-body;
+    resize: none;
+    border-color: $mouse-grey-color;
+    font-size: $small-font;
+  }
+
+  .ck-edit {
+    cursor: pointer;
+    color: $elephant-grey-color;
+    margin-left: 5px;
+    vertical-align: sub;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+
+  .btn {
+    cursor: pointer;
+  }
+
+  .btn-block {
+    padding-top: 5px;
+    text-align: right;
+  }
+
+  .btn-save {
+    margin-right: 0;
+  }
+}

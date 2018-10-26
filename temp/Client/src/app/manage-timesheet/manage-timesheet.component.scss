@@ -1,0 +1,411 @@
+@import '~bootstrap/scss/functions', '~bootstrap/scss/variables',
+  '~bootstrap/scss/mixins', '~assets/scss/_common';
+
+.timesheet-section {
+  margin: 0 20px;
+  color: $mole-grey-color;
+}
+
+.filter-section {
+  margin: 20px 0 45px;
+
+  .left-section {
+    margin-right: auto;
+
+    .user-search-dropdown {
+      position: absolute;
+    }
+
+    .calendar-navigation-section {
+      position: absolute;
+      margin-left: 200px;
+      margin-top: 1px;
+    }
+  }
+
+  .right-section {
+    .ck-more {
+      margin: 5px 0;
+      cursor: pointer;
+      font-size: $medium-font;
+
+      &:after {
+        display: none;
+      }
+    }
+  }
+}
+
+.user-search-dropdown {
+  display: inline-block;
+
+  .search-panel {
+    border: 1px solid $mouse-grey-color;
+    min-width: 280px;
+    position: absolute;
+    z-index: 9;
+    background: $white-color;
+  }
+
+  .text {
+    vertical-align: super;
+  }
+
+  .item-user-image {
+    margin-right: 5px;
+
+    img {
+      width: 24px;
+      height: 24px;
+      border: 1px solid $mouse-grey-color;
+      border-radius: 50%;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+  }
+
+  .name {
+    vertical-align: sub;
+  }
+}
+
+.timesheet-table-section {
+  margin-top: 15px;
+}
+
+.scroll-wrapper {
+  max-height: 530px;
+  border-bottom: 1px solid $mouse-grey-color;
+}
+
+.work-col {
+  min-width: 24%;
+  max-width: 100%;
+  flex: 1 0;
+  text-align: left;
+  @include text-truncate();
+
+  .ck-note {
+    &:hover {
+      color: $primary-color;
+    }
+
+    &.filled {
+      color: $secondary-color;
+    }
+  }
+
+  input {
+    flex-grow: 1;
+    font-size: $small-font;
+    padding: 0;
+    line-height: 2.3;
+    margin-right: 5px;
+
+    &.log-work-input {
+      width: 40%;
+      flex-grow: 0;
+    }
+
+    &.border-color-blue {
+      border-color: $primary-color;
+    }
+
+    &.error {
+      border-bottom: 1px solid $red-color;
+    }
+  }
+
+  .content {
+    display: flex;
+
+    input,
+    label {
+      margin-right: 20px;
+      flex-grow: 1;
+      line-height: 2.3;
+    }
+
+    label {
+      @include text-truncate();
+    }
+
+    .work {
+      cursor: pointer;
+    }
+  }
+
+  .add-log-work {
+    display: flex;
+  }
+
+  .item-icon {
+    margin: 3px 10px 0px 0px;
+    font-size: $large-font;
+  }
+
+  .description {
+    cursor: pointer;
+    margin: 4px 10px 0px 0px;
+    font-size: 1.3rem;
+    background: none;
+    border: none;
+    padding: 0;
+    color: $elephant-grey-color;
+  }
+}
+
+.activity-col {
+  min-width: 11%;
+  max-width: 12%;
+  flex: 1 0;
+  @include text-truncate();
+}
+
+.project-col {
+  min-width: 11%;
+  max-width: 12%;
+  flex: 1 0;
+  @include text-truncate();
+}
+
+.project-col-dropdown,
+.activity-col-dropdown {
+  .id-col {
+    color: $secondary-color;
+  }
+
+  .scrollable-menu {
+    height: auto;
+    max-height: 180px;
+    overflow-x: hidden;
+  }
+}
+
+.level-col {
+  min-width: 8%;
+  max-width: 11%;
+  flex: 1 0;
+  @include text-truncate();
+
+  button {
+    background: none;
+    border: none;
+    color: $mole-grey-color;
+  }
+}
+
+.category-col {
+  min-width: 8%;
+  max-width: 11%;
+  flex: 1 0;
+  @include text-truncate();
+
+  .ck-dot {
+    font-size: 7px;
+  }
+
+  .label {
+    line-height: 2.3;
+    padding: 10px;
+
+    .text {
+      margin-left: 4px;
+    }
+  }
+
+  .selected-text {
+    font-size: $small-font;
+    position: relative;
+    margin-left: 6px;
+
+    .ck-dot {
+      position: absolute;
+      bottom: 10px;
+    }
+
+    .text {
+      margin: 0 2px 0 10px;
+    }
+  }
+}
+
+.hours-col {
+  min-width: 28%;
+  max-width: 35%;
+  flex: 0 0;
+  text-align: center;
+  display: flex;
+
+  &.error {
+    border-bottom-color: $red-color;
+  }
+
+  .hours-cell {
+    @include text-truncate();
+    height: 100%;
+    border-right: 1px solid $mouse-grey-color;
+    flex: 1 1 0;
+    position: relative;
+
+    &:first-child {
+      border-left: 1px solid $mouse-grey-color;
+    }
+
+    &.weekoffs {
+      background-color: $dolfine-grey-color;
+
+      .day,
+      .date {
+        color: $elephant-grey-color;
+      }
+
+      input[type='text'] {
+        background-color: $dolfine-grey-color;
+      }
+    }
+
+    .spent {
+      width: 45%;
+      vertical-align: super;
+      margin-top: 10px;
+    }
+
+    .slash {
+      height: 1px;
+      width: 32px;
+      background: $mouse-grey-color;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      transform: rotate(-45deg);
+    }
+
+    .forecast {
+      width: 45%;
+    }
+  }
+
+  &.new-cockpit-body-cell {
+    padding: 0;
+    color: $mole-grey-color;
+
+    .day {
+      margin: 6px 5px 3px;
+    }
+
+    .date {
+      margin: 3px 5px 6px;
+      font-weight: 600;
+    }
+
+    input[type='text'] {
+      width: 100%;
+      text-align: center;
+      font-size: $small-font;
+      color: $mole-grey-color;
+      border: none;
+    }
+
+    input:focus,
+    input:active {
+      background: $white-color;
+    }
+
+    input[disabled] {
+      font-size: $small-font;
+      color: $mole-grey-color;
+    }
+
+    label {
+      cursor: pointer;
+    }
+
+    &.enable {
+      padding: 0;
+    }
+  }
+}
+
+.total-col {
+  min-width: 6%;
+  max-width: 6%;
+  text-align: center;
+
+  &.new-cockpit-body-cell {
+    line-height: 2.3;
+  }
+}
+
+.operations-col {
+  min-width: 4%;
+  max-width: 4%;
+  padding-left: 0;
+
+  @include media-breakpoint-up(xl) {
+    min-width: 2%;
+    max-width: 2%;
+  }
+
+  .ck-trash {
+    color: $elephant-grey-color;
+    cursor: pointer;
+    line-height: 2.3;
+  }
+}
+
+.category-dropdown {
+  .scrollable-menu {
+    height: auto;
+    max-height: 190px;
+    overflow-x: hidden;
+  }
+
+  .dropdown-list {
+    .ck-dot {
+      font-size: 7px;
+      position: absolute;
+      bottom: 10px;
+    }
+
+    .text {
+      margin: 0 2px 0 12px;
+    }
+  }
+}
+
+.timesheet-summary {
+  .hours-col {
+    border-top: 1px solid $elephant-grey-color;
+  }
+
+  .total-col {
+    font-weight: bold;
+    border: none;
+  }
+
+  .empty-cell {
+    padding: 15px 10px;
+  }
+
+  .hours-cell {
+    padding: 15px 10px;
+  }
+}
+
+.no-record-found-section {
+  margin: 80px auto 0 auto;
+  width: 400px;
+}
+
+.button-wrap {
+  margin-top: 20px;
+
+  .error-msg {
+    color: $red-color;
+    margin: 10px;
+  }
+}

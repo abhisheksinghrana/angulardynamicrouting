@@ -1,0 +1,184 @@
+$ck-action_point: "\ea01";
+$ck-arrow_down: "\ea02";
+$ck-arrow_left: "\ea03";
+$ck-arrow_right: "\ea04";
+$ck-bug: "\ea05";
+$ck-calendar: "\ea06";
+$ck-cancel: "\ea07";
+$ck-capability: "\ea08";
+$ck-checkbox: "\ea09";
+$ck-checkbox_empty: "\ea0a";
+$ck-dot: "\ea0b";
+$ck-down: "\ea0c";
+$ck-edit: "\ea0d";
+$ck-epic: "\ea0e";
+$ck-feature: "\ea0f";
+$ck-goal: "\ea10";
+$ck-internal: "\ea11";
+$ck-more: "\ea12";
+$ck-more_horizontal: "\ea13";
+$ck-note: "\ea14";
+$ck-search: "\ea17";
+$ck-task: "\ea15";
+$ck-tick: "\ea16";
+$ck-trash: "\ea18";
+$ck-triangle: "\ea19";
+$ck-up: "\ea1a";
+$ck-user_story: "\ea1b";
+
+@font-face {
+    font-family: cockpit-icons;
+    src: url("./assets/fonts/cockpit-icons.eot");
+    src: url("./assets/fonts/cockpit-icons.eot?#iefix") format("embedded-opentype"), url("./assets/fonts/cockpit-icons.woff2") format("woff2"), url("./assets/fonts/cockpit-icons.woff") format("woff"), url("./assets/fonts/cockpit-icons.ttf") format("truetype"), url("./assets/fonts/cockpit-icons.svg#cockpit-icons") format("svg");
+    font-style: normal;
+    font-weight: 400;
+}
+
+%ck {
+    display: inline-block;
+    transform: translate(0, 0);
+    text-rendering: auto;
+    font: normal normal 400 14px/1 cockpit-icons;
+    font-size: inherit;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+}
+
+.ck {
+    @extend %ck;
+}
+
+.ck-lg {
+    vertical-align: -15%;
+    line-height: 0.75em;
+    font-size: 1.33333333em;
+}
+
+.ck-2x {
+    font-size: 2em;
+}
+
+.ck-3x {
+    font-size: 3em;
+}
+
+.ck-4x {
+    font-size: 4em;
+}
+
+.ck-5x {
+    font-size: 5em;
+}
+
+.ck-fw {
+    width: 1.28571429em;
+    text-align: center;
+}
+
+.ck-action_point::before {
+    content: "\ea01";
+}
+
+.ck-arrow_down::before {
+    content: "\ea02";
+}
+
+.ck-arrow_left::before {
+    content: "\ea03";
+}
+
+.ck-arrow_right::before {
+    content: "\ea04";
+}
+
+.ck-bug::before {
+    content: "\ea05";
+}
+
+.ck-calendar::before {
+    content: "\ea06";
+}
+
+.ck-cancel::before {
+    content: "\ea07";
+}
+
+.ck-capability::before {
+    content: "\ea08";
+}
+
+.ck-checkbox::before {
+    content: "\ea09";
+}
+
+.ck-checkbox_empty::before {
+    content: "\ea0a";
+}
+
+.ck-dot::before {
+    content: "\ea0b";
+}
+
+.ck-down::before {
+    content: "\ea0c";
+}
+
+.ck-edit::before {
+    content: "\ea0d";
+}
+
+.ck-epic::before {
+    content: "\ea0e";
+}
+
+.ck-feature::before {
+    content: "\ea0f";
+}
+
+.ck-goal::before {
+    content: "\ea10";
+}
+
+.ck-internal::before {
+    content: "\ea11";
+}
+
+.ck-more::before {
+    content: "\ea12";
+}
+
+.ck-more_horizontal::before {
+    content: "\ea13";
+}
+
+.ck-note::before {
+    content: "\ea14";
+}
+
+.ck-search::before {
+    content: "\ea17";
+}
+
+.ck-task::before {
+    content: "\ea15";
+}
+
+.ck-tick::before {
+    content: "\ea16";
+}
+
+.ck-trash::before {
+    content: "\ea18";
+}
+
+.ck-triangle::before {
+    content: "\ea19";
+}
+
+.ck-up::before {
+    content: "\ea1a";
+}
+
+.ck-user_story::before {
+    content: "\ea1b";
+}

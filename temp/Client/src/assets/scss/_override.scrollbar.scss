@@ -1,0 +1,39 @@
+.ps__rail-y {
+  opacity: 1 !important;
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  width: 10px !important;
+
+  &:hover {
+    width: 10px !important;
+  }
+
+  .ps__thumb-y {
+    width: 8px;
+    right: 1px;
+    border-radius: 0;
+
+    &:hover {
+      width: 8px !important;
+    }
+  }
+}
+
+.ps__rail-x {
+  opacity: 1 !important;
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  height: 10px !important;
+
+  &:hover {
+    height: 10px !important;
+  }
+
+  .ps__thumb-x {
+    height: 8px;
+    right: 1px;
+    border-radius: 0;
+
+    &:hover {
+      height: 8px !important;
+    }
+  }
+}

@@ -1,0 +1,160 @@
+@import '~bootstrap/scss/mixins';
+@import '~assets/scss/_common';
+
+.team-report-section {
+  margin: 0 20px;
+}
+
+.filter-section {
+  margin-top: 20px;
+
+  .current-btn {
+    cursor: pointer;
+    margin-right: 10px;
+    color: $wolf-grey-color;
+    font-weight: 600;
+    padding: 6px 8px;
+    border-radius: 2px;
+    font-size: 0.9em;
+    border: 1px solid $mouse-grey-color;
+    background-color: $dolfine-grey-color;
+  }
+
+  .arrow {
+    margin-right: 10px;
+
+    .ck {
+      cursor: pointer;
+      display: table-cell;
+      font-size: 0.7em;
+      padding: 9px 9px;
+      margin-right: 10px;
+      border: 1px solid $mouse-grey-color;
+      background-color: $dolfine-grey-color;
+    }
+
+    .ck-arrow_left {
+      border-radius: 2px 0 0 2px;
+    }
+
+    .ck-arrow_right {
+      border-radius: 0 2px 2px 0;
+    }
+
+    .disabled {
+      cursor: not-allowed;
+      color: $mouse-grey-color;
+    }
+  }
+
+  .ck-calendar {
+    font-size: 1rem;
+    margin-right: 5px;
+  }
+
+  .details {
+    span {
+      vertical-align: text-top;
+      margin-right: 5px;
+      color: $mole-grey-color;
+    }
+
+    .week {
+      font-weight: 600;
+    }
+  }
+}
+
+.team-timesheet-table-section {
+  margin-top: 25px;
+  font-size: 1.1em;
+}
+
+.scroll-wrapper {
+  max-height: 368px;
+  border-bottom: 2px solid $mouse-grey-color;
+}
+
+.cockpit-header-cell {
+  @include text-truncate();
+}
+
+.cockpit-body-cell {
+  padding: 15px 10px;
+  height: 46px;
+}
+
+.name-col {
+  width: 15%;
+  text-align: left;
+  @include text-truncate();
+}
+
+.function-col {
+  width: 15%;
+  text-align: left;
+  @include text-truncate();
+}
+
+.leaves-col {
+  width: 8%;
+
+  &.cockpit-body-cell {
+    border-right: none;
+  }
+}
+
+.billable-col {
+  width: 8%;
+
+  &.cockpit-body-cell {
+    border-left: none;
+    border-right: none;
+  }
+}
+
+.backup-col {
+  width: 8%;
+
+  &.cockpit-body-cell {
+    border-left: none;
+    border-right: none;
+  }
+}
+
+.non-billable-col {
+  width: 8%;
+
+  &.cockpit-body-cell {
+    border-left: none;
+    border-right: none;
+  }
+}
+
+.overtime-col {
+  width: 8%;
+
+  &.cockpit-body-cell {
+    border-left: none;
+  }
+}
+
+.remark-col {
+  width: 30%;
+  text-align: left;
+  @include text-truncate();
+}
+
+.timesheet-summary {
+  .cockpit-body-cell {
+    font-weight: bold;
+    background: $dolfine-grey-color;
+    border-width: 2px;
+    border-top: none;
+  }
+
+  .empty-cell {
+    padding: 15px 10px;
+    float: left;
+  }
+}

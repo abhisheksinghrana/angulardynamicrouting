@@ -1,0 +1,8 @@
+<div class="new-cockpit-table-row">
+  <div class="new-cockpit-body-cell hours-col">
+    <div class="columns" *ngFor="let item of worklogDetails?.worklogDetail">
+      <span [title]="item?.spent">{{item?.spent}}</span>
+    </div>
+  </div>
+</div>
+<app-work-item-hours [worklogDetails]="worklog" *ngFor="let worklog of worklogDetails?.children"></app-work-item-hours>

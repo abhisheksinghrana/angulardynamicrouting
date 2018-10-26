@@ -1,0 +1,99 @@
+<section class="timesheet-section">
+  <article class="filter-section container-fluid">
+    <div class="row">
+      <div class="left-section">
+        <div class="user-search-dropdown" (clickOutside)="resetUserSearchPanel()">
+          <div class="panel-dropdown-view-selector" [ngClass]="{'border-bottom-secondary-color': userSearchPanelDetails?.showPanel}"
+            (click)="onUserDropdownClick()">
+            <div class="content">
+              <span class="item-user-image">
+                <img src="{{env?.deployUrl}}/assets/images/default_user.png" alt="" *ngIf="!userSearchPanelDetails?.selectedUserDetail?.profileImageUrl"
+                />
+                <img src="{{userSearchPanelDetails?.selectedUserDetail?.profileImageUrl}}" alt="" *ngIf="userSearchPanelDetails?.selectedUserDetail?.profileImageUrl"
+                />
+              </span>
+              <span class="name" title="Select User" *ngIf="!userSearchPanelDetails?.selectedUserDetail?.id">Select User
+              </span>
+              <span class="name" title="{{userSearchPanelDetails?.selectedUserDetail?.fullName}}" *ngIf="userSearchPanelDetails?.selectedUserDetail?.id">{{userSearchPanelDetails?.selectedUserDetail?.fullName}}</span>
+            </div>
+            <div class="ck ck-arrow_down"></div>
+          </div>
+          <div class="search-panel" *ngIf="userSearchPanelDetails?.showPanel">
+            <app-user-search (getSearchListEmitter)="getUserList($event)" (getRecentSearchListEmitter)="getRecentUserSearchList($event)"
+              (onItemSelectionEmitter)="onUserSelection($event)" [searchDefaultParams]="userSearchParams" [searchList]="userSearchPanelDetails?.searchList"
+              [recentSearchList]="userSearchPanelDetails?.recentSearchList"></app-user-search>
+          </div>
+        </div>
+        <app-calendar-navigation class="calendar-navigation-section" [disabled]="calendarNavigationDisabled" [details]="calendarNavigationDetails"
+          (fetch)="getCalendarNavigation($event)"></app-calendar-navigation>
+      </div>
+      <div class="right-section" *ngIf="accountRegionSetting?.isForecastEnable">
+        <div ngbDropdown placement="bottom-right" class="d-inline-block">
+          <span class="ck ck-more" id="userPreferenceDropdown" ngbDropdownToggle></span>
+          <div ngbDropdownMenu aria-labelledby="userPreferenceDropdown">
+            <button class="dropdown-item" (click)="toogleDisplayForecast()" *ngIf="accountRegionSetting?.isForecastEnable">{{accountRegionSetting?.isDisplayForecast?'Hide
+              forecast':'Show forecast'}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="timesheet-table-section" *ngIf="userSearchPanelDetails?.selectedUserDetail">
+    <div class="new-cockpit-table">
+      <div class="new-cockpit-table-row">
+        <div class="new-cockpit-header-cell work-col">Work</div>
+        <div class="new-cockpit-header-cell project-col" *ngIf="thirdPartyConfigurationStatus.configured === userSearchPanelDetails.thirdPartyConfigurationStatus">Project</div>
+        <div class="new-cockpit-header-cell activity-col" *ngIf="thirdPartyConfigurationStatus.configured === userSearchPanelDetails.thirdPartyConfigurationStatus">Activity</div>
+        <div class="new-cockpit-header-cell level-col">Level</div>
+        <div class="new-cockpit-header-cell category-col" *ngIf="accountRegionSetting?.isDisplayCategory">Category</div>
+        <div class="new-cockpit-header-cell hours-col justify-content-center">Hours</div>
+        <div class="new-cockpit-header-cell total-col">Total</div>
+        <div class="new-cockpit-header-cell operations-col"></div>
+      </div>
+      <app-add-new-log [workLogListDetails]="workLogListDetails" [userSearchPanelDetails]="userSearchPanelDetails" [accountRegionSetting]="accountRegionSetting"
+        [projectList]="projectList" [activityDetails]="activityDetails" [organizationLevelList]="organizationLevelList" [categoryList]="categoryList"
+        (getBillableActivities)="getBillableActivities($event)" (getNonBillableActivities)="getNonBillableActivities($event)"
+        (resetActivitiesDetails)="resetActivitiesDetails()" [categoryListObj]="categoryListObj" [calendarNavigationDetails]="calendarNavigationDetails"
+        (triggerCalculateTotalSpentWeekDayWise)="calculateTotalSpentWeekDayWise($event)" (triggerConvertTotalSpentForWeekDaysInArray)="convertTotalSpentForWeekDaysInArray()"></app-add-new-log>
+    </div>
+    <perfect-scrollbar class="scroll-wrapper" *ngIf="workLogListDetails?.list?.length && thirdPartyConfigurationStatus.configuredButUserNotFound !== userSearchPanelDetails.thirdPartyConfigurationStatus">
+      <div class="new-cockpit-table">
+        <app-manage-timesheet-log [worklog]="worklog" [accountRegionSetting]="accountRegionSetting" [isTimesheetFreezed]="isTimesheetFreezed"
+          [isSheetSubmitted]="isSheetSubmitted" [index]="index" [projectList]="projectList" [activityDetails]="activityDetails"
+          [organizationLevelList]="organizationLevelList" [categoryList]="categoryList" (saveDescription)="saveDescription($event)"
+          (getBillableActivities)="getBillableActivities($event)" (getNonBillableActivities)="getNonBillableActivities($event)"
+          (resetActivitiesDetails)="resetActivitiesDetails()" (triggerValidateDayLogTimeLimit)="validateDayLogTimeLimit($event)"
+          (updateCurrentlySelectedValue)="updateCurrentlySelectedValue()" (triggerOnDeleteConfirmation)="onDeleteWorklogConfirmationResponse($event)"
+          *ngFor="let worklog of workLogListDetails?.list;index as index"></app-manage-timesheet-log>
+      </div>
+    </perfect-scrollbar>
+    <div class="new-cockpit-table" *ngIf="workLogListDetails?.list?.length && thirdPartyConfigurationStatus.configuredButUserNotFound !== userSearchPanelDetails.thirdPartyConfigurationStatus">
+      <div class="new-cockpit-table-row timesheet-summary">
+        <div class="empty-cell work-col"></div>
+        <div class="empty-cell project-col" *ngIf="thirdPartyConfigurationStatus.configured === userSearchPanelDetails.thirdPartyConfigurationStatus"></div>
+        <div class="empty-cell activity-col" *ngIf="thirdPartyConfigurationStatus.configured === userSearchPanelDetails.thirdPartyConfigurationStatus"></div>
+        <div class="empty-cell level-col"></div>
+        <div class="empty-cell category-col" *ngIf="accountRegionSetting?.isDisplayCategory"></div>
+        <div class="new-cockpit-body-cell hours-col">
+          <div class="hours-cell" [ngClass]="{'weekoffs': (workDaySpent?.weekDay === 0 || workDaySpent?.weekDay === 6)}" [ngStyle]="{'display': ((workDaySpent?.weekDay === 0 || workDaySpent?.weekDay === 6) && !accountRegionSetting?.isDisplayWeekend)?'none':'block'}"
+            *ngFor="let workDaySpent of timesheetSummary.totalSpentForWeekDaysArr">
+            <label>{{workDaySpent.spent}}</label>
+            <!-- <span class="slash" *ngIf="accountRegionSetting?.isDisplayForecast"></span>
+              <label *ngIf="accountRegionSetting?.isDisplayForecast">0</label> -->
+          </div>
+        </div>
+        <div class="new-cockpit-body-cell total-col">{{timesheetSummary?.totalSpentForTimesheet + 'h'}}
+          <span *ngIf="accountRegionSetting?.isDisplayForecast">/ 0h</span>
+        </div>
+        <div class="empty-cell operations-col"></div>
+      </div>
+    </div>
+  </article>
+  <div class="no-record-found-section" *ngIf="!workLogListDetails?.list?.length && !workLogListDetails?.isLoading && userSearchPanelDetails?.selectedUserDetail">
+    <app-no-record-found [title]="userMsgData?.title" [description]="userMsgData?.description"></app-no-record-found>
+  </div>
+  <div class="button-wrap" *ngIf="workLogListDetails?.list?.length && thirdPartyConfigurationStatus.configuredButUserNotFound !== userSearchPanelDetails.thirdPartyConfigurationStatus">
+    <span class="error-msg" *ngIf="workLogListDetails?.message">{{workLogListDetails?.message}}</span>
+    <input type="button" class="ac-button ac-primary" value="Submit days" (click)="validateTimesheet()">
+  </div>
+</section>

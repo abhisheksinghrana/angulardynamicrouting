@@ -1,0 +1,42 @@
+input[type='text'],
+input[type='time'],
+input[type='date'] {
+  font-family: $font-body;
+  border-width: 0 0 1px;
+  border-color: $elephant-grey-color;
+  outline: none;
+  font-size: $small-font;
+  padding: 2px 0;
+
+  &:focus {
+    background-color: $white-color;
+    border-color: $primary-color;
+    box-shadow: none;
+  }
+
+  &:hover {
+    border-color: $primary-color;
+  }
+
+  &[disabled] {
+    background-color: $white-color;
+    color: $elephant-grey-color;
+    border-color: $mouse-grey-color;
+  }
+
+  &.required {
+    border-color: $secondary-color;
+  }
+
+  &.error {
+    border-color: $red-color;
+  }
+
+  &::-ms-clear {
+    display: none;
+  }
+
+  &.attention {
+    border-color: $primary-color;
+  }
+}

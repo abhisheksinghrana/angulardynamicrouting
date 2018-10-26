@@ -1,0 +1,203 @@
+@import './_mixins';
+
+.daterangepicker {
+  @include box-shadow(0px 1px 4px 0px, rgba(211, 211, 211, 1));
+  display: none;
+  border: 1px solid $mouse-grey-color;
+  border-radius: 2px;
+  padding: 0 !important;
+  margin: 0;
+
+  .ranges {
+    padding: 10px 12px;
+  }
+
+  table {
+    border-spacing: 0;
+  }
+
+  .calendar .prev,
+  .calendar .next {
+    font-size: $x-small-font;
+    color: $wolf-grey-color;
+  }
+}
+
+.daterangepicker.ltr .ranges {
+  float: right !important;
+  min-height: 150px;
+
+  ul {
+    li {
+      font-family: $font-body;
+      font-size: $small-font;
+      background-color: $white-color;
+      color: $mole-grey-color;
+      border: 0;
+      &.active,
+      &:hover {
+        color: $primary-color;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .range_inputs {
+    position: absolute;
+    bottom: 14px;
+    font-size: 13px;
+
+    .btn {
+      font-family: $font-header;
+      font-size: $x-medium-font;
+      background-color: $white-color;
+      cursor: pointer;
+      line-height: normal;
+      border-radius: 2px;
+      border: 1px solid $primary-color;
+      padding: 8px 16px;
+      margin: 0;
+      color: $mole-grey-color;
+
+      &:hover {
+        background-color: $primary-color;
+        color: $white-color;
+      }
+
+      &.cancel-button {
+        border: 1px solid $elephant-grey-color;
+        color: $mole-grey-color;
+        margin-right: 15px;
+
+        &:hover {
+          background-color: $mouse-grey-color;
+        }
+      }
+    }
+
+    .applyBtn {
+      float: right;
+      margin-left: 5px;
+    }
+
+    .cancelBtn {
+      margin-right: 0;
+    }
+  }
+}
+
+.daterangepicker_input {
+  color: $mole-grey-color;
+
+  input.input-mini {
+    font-family: $font-body;
+    border: 1px solid $mouse-grey-color;
+    color: $mole-grey-color;
+    font-size: $small-font;
+    border-radius: 2px;
+    padding: 1px 0 1px 45px;
+    height: auto;
+
+    &.active {
+      border-radius: 0;
+      border: 1px solid $mouse-grey-color;
+      border-bottom-color: $primary-color;
+    }
+  }
+  i {
+    font-size: $small-font;
+    top: 11px !important;
+    color: $elephant-grey-color;
+  }
+}
+
+.calendar-table {
+  padding: 0 !important;
+  border: none !important;
+
+  .month,
+  .prev,
+  .next {
+    color: $secondary-color;
+  }
+
+  .month {
+    font-size: $x-medium-font;
+    font-family: $font-header;
+    font-weight: 500;
+  }
+
+  .table-condensed {
+    thead tr:last-child {
+      border: 1px solid $mouse-grey-color;
+      border-bottom: none;
+    }
+
+    th,
+    td {
+      font-family: $font-body;
+      font-size: $small-font;
+      height: 30px;
+      width: 30px;
+      &.start-date {
+        &.active {
+          height: 30px;
+          background-color: $secondary-color;
+          border-radius: 50%;
+        }
+      }
+      &.end-date {
+        &.active {
+          height: 30px;
+          background-color: $secondary-color;
+          border-radius: 50%;
+        }
+      }
+      &.today {
+        color: $primary-color;
+        font-weight: 600;
+
+        &.active {
+          color: $white-color;
+        }
+      }
+      &.disabled {
+        text-decoration: initial;
+      }
+    }
+
+    th {
+      font-family: $font-header;
+    }
+
+    .available {
+      &.in-range {
+        background-color: $dolfine-grey-color;
+      }
+    }
+  }
+}
+
+.calendar {
+  margin: 0 !important;
+  padding: 12px;
+  &.left {
+    .fa-calendar {
+      font-family: $font-body;
+      font-size: 12px;
+      &::before {
+        content: 'From';
+      }
+    }
+  }
+  &.right {
+    border-right: 1px solid $mouse-grey-color;
+    .fa-calendar {
+      font-family: $font-body;
+      font-size: 12px;
+      &::before {
+        content: 'To';
+      }
+    }
+  }
+}

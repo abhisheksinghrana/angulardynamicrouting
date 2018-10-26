@@ -1,0 +1,36 @@
+<div class="group-panel">
+  <div class="content">
+    <div class="group-by-list">
+      <div class="category-heading">Group by</div>
+      <ul class="item-list">
+        <li class="item no-selection" *ngIf="!activeGroupByList?.length && inactiveGroupByList?.length">No selection</li>
+        <li class="item no-selection" *ngIf="!activeGroupByList?.length && !inactiveGroupByList?.length">No group by found</li>
+        <li class="item" *ngFor="let item of activeGroupByList;trackBy:trackByFn; index as index; first as first; last as last">
+          <label class="container">{{item?.fieldName}}
+            <input class="" type="checkbox" [(ngModel)]="item.isActive" (ngModelChange)="removeGroupBy(item, index)">
+            <span class="checkmark ck" [ngClass]="{'ck-checkbox_empty': !item.isActive, 'checkbox': item.isActive }"></span>
+          </label>
+          <span class="action-group">
+            <span class="action">
+              <i class="ck ck-up" [ngStyle]="{'visibility': first?'hidden':'visible'}" (click)="moveUp(index)"></i>
+            </span>
+            <span class="action">
+              <i class="ck ck-down" [ngStyle]="{'visibility': last?'hidden':'visible'}" (click)="moveDown(index)"></i>
+            </span>
+          </span>
+        </li>
+      </ul>
+    </div>
+    <div class="inactive-list" *ngIf="inactiveGroupByList?.length">
+      <div class="category-heading">Inactive</div>
+      <ul class="item-list">
+        <li class="item" *ngFor="let item of inactiveGroupByList;trackBy:trackByFn; index as index">
+          <label class="container">{{item?.fieldName}}
+            <input class="" type="checkbox" [(ngModel)]="item.isActive" (ngModelChange)="addGroupBy(item, index)">
+            <span class="checkmark ck" [ngClass]="{'ck-checkbox_empty': !item.isActive, 'checkbox': item.isActive }"></span>
+          </label>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

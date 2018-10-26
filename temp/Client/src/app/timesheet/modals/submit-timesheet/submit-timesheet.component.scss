@@ -1,0 +1,20 @@
+@import '~assets/scss/_colors';
+
+.spent-hours {
+  font-size: 3rem;
+  text-align: center;
+  margin: 25px 10px;
+  font-weight: 600;
+
+  .success {
+    color: $jungle-green-color;
+  }
+
+  .danger {
+    color: $red-color;
+  }
+
+  .slash {
+    font-weight: bold;
+  }
+}

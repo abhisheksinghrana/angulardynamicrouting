@@ -1,0 +1,62 @@
+<article class="team-report-section">
+  <!-- <select id="selectedTeamId" name="selectedTeamId" [(ngModel)]="selectedTeamId" (change)="fetchTeamWorklog()">
+    <option *ngFor="let squad of squadList" value="{{squad.id}}">{{squad.text}}</option>
+  </select> -->
+  <div class="filter-section">
+    <span class="current-btn" (click)="getCalendarNavigation(true)">Current</span>
+    <span class="arrow">
+      <span class="ck ck-arrow_left" [ngClass]="{'disabled': !calendarNavigationDetails?.isPreviousActive}" (click)="getCalendarNavigation(calendarNavigationDetails?.isPreviousActive, weekActionType?.previous, calendarNavigationDetails?.startDate)"></span>
+      <span class="ck ck-arrow_right" [ngClass]="{'disabled': !calendarNavigationDetails?.isNextActive}" (click)="getCalendarNavigation(calendarNavigationDetails?.isNextActive, weekActionType?.next, calendarNavigationDetails?.startDate)"></span>
+    </span>
+    <span class="ck ck-calendar"></span>
+    <span class="details">
+      <span class="week" *ngIf="calendarNavigationDetails?.weekNumber">Week {{calendarNavigationDetails?.weekNumber}}</span>
+      <span *ngIf="calendarNavigationDetails?.displayStartDate && calendarNavigationDetails?.displayEndDate"> - {{calendarNavigationDetails?.displayStartDate}}
+        to {{calendarNavigationDetails?.displayEndDate}}</span>
+    </span>
+  </div>
+  <div class="team-timesheet-table-section">
+    <div class="cockpit-table">
+      <div class="cockpit-table-row">
+        <div class="cockpit-header-cell name-col" title="Name">Name</div>
+        <div class="cockpit-header-cell function-col" title="Function">Function</div>
+        <div class="cockpit-header-cell leaves-col" title="Leaves">Leaves</div>
+        <div class="cockpit-header-cell billable-col" title="Billable">Billable</div>
+        <div class="cockpit-header-cell backup-col" title="Backup">Backup</div>
+        <div class="cockpit-header-cell non-billable-col" title="Non billable">Non billable</div>
+        <div class="cockpit-header-cell overtime-col" title="Overtime">Overtime</div>
+        <div class="cockpit-header-cell remark-col" title="Remark">Remark</div>
+      </div>
+    </div>
+    <perfect-scrollbar class="scroll-wrapper">
+      <div class="cockpit-table">
+        <div class="cockpit-table-row" *ngFor="let workLog of teamWorklog.teamWorkLogDetails">
+          <div class="cockpit-body-cell name-col" title="{{workLog?.name}}">{{workLog?.name}}</div>
+          <div class="cockpit-body-cell function-col" title="{{workLog?.function}}">{{workLog?.function}}</div>
+          <div class="cockpit-body-cell leaves-col">{{workLog?.leave?.count}}{{workLog?.leave?.unit ? workLog?.leave?.unit:'h'}}</div>
+          <div class="cockpit-body-cell billable-col">{{workLog?.billable}}h</div>
+          <div class="cockpit-body-cell backup-col">{{workLog?.backup}}h</div>
+          <div class="cockpit-body-cell non-billable-col">{{workLog?.nonBillable}}h</div>
+          <div class="cockpit-body-cell overtime-col">{{workLog?.overtime}}h</div>
+          <div class="cockpit-body-cell remark-col" title="{{workLog?.remark}}">{{workLog?.remark}}</div>
+        </div>
+      </div>
+    </perfect-scrollbar>
+    <div class="cockpit-table" *ngIf="teamWorklog?.teamWorkLogDetails?.length">
+      <div class="cockpit-table-row timesheet-summary">
+        <div class="empty-cell name-col"></div>
+        <div class="empty-cell function-col"></div>
+        <div class="cockpit-body-cell leaves-col">{{timesheetSummary?.totalLeaves}}{{timesheetSummary?.leaveUnit? timesheetSummary?.leaveUnit:'h'}}</div>
+        <div class="cockpit-body-cell billable-col">{{timesheetSummary?.totalBillableLogged}}h</div>
+        <div class="cockpit-body-cell backup-col">{{timesheetSummary?.totalBackup}}h</div>
+        <div class="cockpit-body-cell non-billable-col">{{timesheetSummary?.totalNonBillable}}h</div>
+        <div class="cockpit-body-cell overtime-col">{{timesheetSummary?.totalOvertime}}h</div>
+        <div class="empty-cell remark-col" title="Weekend away"></div>
+      </div>
+    </div>
+
+    <!-- <div>
+      Total billable: {{teamWorklog.totalBillable}}
+    </div> -->
+  </div>
+</article>

@@ -1,0 +1,9 @@
+<div class="input-group" daterangepicker (selected)="selectedDate($event, dateRange)" (applyDaterangepicker)="calendarEventsHandler($event)"
+  (showDaterangepicker)="isCalendarOpen = !isCalendarOpen;" (hideDaterangepicker)="isCalendarOpen = !isCalendarOpen;">
+  <a class="calendar-icon">
+    <i class="ck ck-calendar"></i>
+  </a>
+  <span class="form-control uneditable-input" [ngClass]="{'focus' : isCalendarOpen}" name="daterange">
+    {{ dateRange?.startDate | date:'dd MMM y' }} - {{ dateRange?.endDate| date:'dd MMM y' }}
+  </span>
+</div>

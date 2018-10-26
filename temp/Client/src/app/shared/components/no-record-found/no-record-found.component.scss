@@ -1,0 +1,28 @@
+@import '~bootstrap/scss/mixins';
+@import '~assets/scss/_common';
+
+.no-record-found-content {
+  text-align: center;
+  font-size: $medium-font;
+  width: 400px;
+
+  .title {
+    font-size: $medium-font;
+    color: $primary-color;
+  }
+
+  .description {
+    margin: 5px 0;
+    color: $wolf-grey-color;
+    font-size: $small-font;
+  }
+
+  .empty-rocket-hanger-img {
+    background: url('../../../../assets/images/empty-rocket-hanger.svg')
+      no-repeat center;
+    background-size: 75%;
+    width: 400px;
+    height: 285px;
+    margin-top: 40px;
+  }
+}

@@ -1,0 +1,149 @@
+.cockpit-tab {
+  ul {
+    li {
+      a {
+        font-size: $small-font;
+      }
+    }
+  }
+}
+
+.dropdown-menu {
+  .dropdown-item {
+    font-family: $font-body;
+    font-size: $small-font;
+    color: $mole-grey-color;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+
+    &:active {
+      background-color: transparent;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: $dolfine-grey-color;
+    }
+  }
+}
+
+.custom-dropdown {
+  border: 1px solid transparent;
+
+  .dropdown-toggle {
+    cursor: pointer;
+    padding: 4px;
+
+    .text {
+      @include text-truncate();
+      display: inline-block;
+      max-width: 80%;
+      padding: 2px;
+    }
+
+    &:after {
+      display: none;
+    }
+
+    .ck-arrow_down {
+      font-size: $xx-small-font;
+      vertical-align: super;
+    }
+  }
+
+  &:hover,
+  &.show {
+    border-color: $mouse-grey-color;
+
+    .ck-arrow_down {
+      color: $primary-color;
+    }
+  }
+
+  &.error {
+    border-color: $red-color;
+  }
+
+  .dropdown-item {
+    padding: 7px 10px;
+  }
+}
+
+// Bootstrap aapend to body related changes.
+.append-to-body {
+  &.dropdown-menu {
+    font-size: $small-font;
+    padding: 0;
+
+    &.show {
+      top: -2px !important;
+      left: 0 !important;
+    }
+
+    .dropdown-item {
+      font-size: $small-font;
+      color: $mole-grey-color;
+      padding: 0;
+    }
+  }
+}
+
+.table-dropdown {
+  .dropdown-item {
+    &:hover,
+    &:focus,
+    &.active {
+      background-color: $white-color;
+    }
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  tr {
+    cursor: pointer;
+
+    &:hover,
+    &.active {
+      background-color: $dolfine-grey-color;
+    }
+  }
+
+  td {
+    padding: 7px 10px;
+  }
+}
+
+.dropdown-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 300px;
+
+  li {
+    padding: 7px 10px;
+    font-size: $small-font;
+    color: $mole-grey-color;
+    position: relative;
+    @include text-truncate();
+
+    &:hover {
+      background-color: $dolfine-grey-color;
+      cursor: pointer;
+    }
+  }
+}
+
+.popover {
+  &.bs-popover-bottom-left {
+    .arrow {
+      left: 0.5em !important;
+    }
+  }
+
+  .popover-body {
+    padding: 0;
+  }
+}

@@ -1,0 +1,207 @@
+@import '~bootstrap/scss/mixins';
+@import '~assets/scss/_common';
+
+.report-filters {
+  margin: 0 0 20px 0;
+  height: 32px;
+}
+
+.user-search-dropdown {
+  display: inline-block;
+
+  .search-panel {
+    border: 1px solid $mouse-grey-color;
+    min-width: 280px;
+    position: absolute;
+    z-index: 9;
+    background: $white-color;
+  }
+
+  .text {
+    vertical-align: super;
+  }
+
+  .item-user-image {
+    margin-right: 5px;
+
+    img {
+      width: 24px;
+      height: 24px;
+      border: 1px solid $mouse-grey-color;
+      border-radius: 50%;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+  }
+
+  .name {
+    vertical-align: sub;
+  }
+}
+
+.group-by-control {
+  margin-left: 20px;
+
+  .content {
+    padding: 4px 0;
+  }
+
+  .group-by {
+    color: $elephant-grey-color;
+  }
+}
+
+.date-range-control {
+  margin-left: 20px;
+}
+
+.generate-report-btn {
+  margin-left: 20px;
+
+  .ac-button {
+    height: 32px;
+  }
+}
+
+.row-wrapper {
+  display: flex;
+}
+
+.new-cockpit-table-row {
+  max-height: 40px;
+}
+
+.work-item-section {
+  width: 35%;
+
+  .header-row {
+    height: 42px;
+  }
+}
+
+.hours-section {
+  width: 65%;
+}
+
+.worklog-col {
+  @include text-truncate();
+  width: 70%;
+  text-align: left;
+}
+
+.sum-col {
+  @include text-truncate();
+  width: 30%;
+  border-right: 1px solid $secondary-color;
+  text-align: right;
+}
+
+.hours-col {
+  min-width: 100%;
+  text-align: center;
+  padding: 0;
+  display: flex;
+
+  .columns {
+    @include text-truncate();
+    height: 100%;
+    display: inline-block;
+    border-right: 1px solid $mouse-grey-color;
+    flex: 1 1 0;
+    min-width: 49.25px;
+    width: 49.25px;
+  }
+
+  &.new-cockpit-header-cell {
+    color: $elephant-grey-color;
+
+    .day {
+      margin: 3px 5px;
+    }
+
+    .date {
+      margin: 4px 5px;
+    }
+  }
+
+  &.new-cockpit-body-cell {
+    .columns {
+      padding: 12px 2px;
+    }
+  }
+}
+
+.scroll-wrapper {
+  max-height: 560px;
+}
+
+.no-record-found-section {
+  margin: 180px auto 0 auto;
+  width: 400px;
+}
+
+.footer-row {
+  font-weight: bold;
+  color: $mole-grey-color;
+}
+
+.tab-panel {
+  padding: 15px 0;
+  display: flex;
+  justify-content: center;
+
+  .tab {
+    padding: 5px 10px;
+    color: $elephant-grey-color;
+    background-color: $white-color;
+    border: 1px solid $mouse-grey-color;
+    font-size: $small-font;
+    cursor: pointer;
+
+    &.active {
+      color: $white-color;
+      background-color: $primary-color;
+      border-color: $primary-color;
+    }
+  }
+}
+
+.hours-section-header,
+.hours-section-body,
+.hours-section-footer {
+  .footer-row {
+    border-bottom: none;
+  }
+
+  overflow: hidden;
+
+  .new-cockpit-table {
+    overflow: initial;
+  }
+}
+
+.hours-section-header {
+  .new-cockpit-header-cell {
+    border-bottom: none;
+
+    .columns {
+      border-bottom: 1px solid #ff6100;
+    }
+  }
+}
+
+.hours-section-footer {
+  border-top: 1px solid #ff6100;
+
+  .new-cockpit-body-cell {
+    border-bottom: none;
+
+    .columns {
+      border-bottom: 1px solid #dddddd;
+    }
+  }
+
+  .footer-row {
+    border-top: none;
+  }
+}

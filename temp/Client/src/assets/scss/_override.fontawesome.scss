@@ -1,0 +1,11 @@
+.fa {
+  @extend .ck;
+}
+
+.fa-chevron-left::before {
+  @extend .ck-arrow_left::before;
+}
+
+.fa-chevron-right::before {
+  @extend .ck-arrow_right::before;
+}

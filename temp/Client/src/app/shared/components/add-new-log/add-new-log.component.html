@@ -1,0 +1,177 @@
+<form id="quickAddForm" #quickAddForm="ngForm" (ngSubmit)="addNewWorkLog(quickAddForm)">
+  <div class="new-cockpit-table-row sub-header-row">
+    <div class="new-cockpit-body-cell work-col" (clickOutside)="resetLogWorkSearchPanel()">
+      <div class="add-log-work" *ngIf="thirdPartyConfigurationStatus.configuredButUserNotFound !== userSearchPanelDetails.thirdPartyConfigurationStatus">
+        <input type="text" name="logWorkInput" [ngClass]="{'log-work-input': !logWorkPanelData?.showAddLayout, 'border-color-blue': logWorkPanelData?.showLogWorkPanel, 'border-danger': logWorkInput?.errors?.required && (logWorkInput?.touched || quickAddForm?.submitted)}"
+          maxlength="250" placeholder="Log work" (focus)="onFocusLogWorkInput()" (window:resize)="onResize($event)" [(ngModel)]="newWorklog.searchText"
+          required #logWorkInput="ngModel" #logWorkInputField autocomplete="off" (ngModelChange)="onWorkItemSearchTextChange(logWorkPanelData.selectedListType)">
+      </div>
+      <div class="log-work-panel" *ngIf="logWorkPanelData?.showLogWorkPanel" [ngStyle]="{'width': logWorkPanelData.logPanelWidth}">
+        <div class="tab-panel">
+          <div class="tab" [ngClass]="{'active': logWorkPanelData.selectedListType === workLogSearchListTypeConstants.workItems}" (click)="onLogWorkSearchTabSelection(workLogSearchListTypeConstants.workItems)">Work
+            items
+          </div>
+          <div class="tab" [ngClass]="{'active': logWorkPanelData.selectedListType === workLogSearchListTypeConstants.internal}" (click)="onLogWorkSearchTabSelection(workLogSearchListTypeConstants.internal)">Internal</div>
+        </div>
+        <div class="workitem-list">
+          <ng-container *ngIf="logWorkPanelData.selectedListType === workLogSearchListTypeConstants.workItems">
+            <perfect-scrollbar class="work-item-container" (psYReachEnd)="loadWorkItemData()">
+              <div class="item work-item" *ngFor="let item of logWorkPanelData.workItemSearchDetails.list" (click)="fillAddWorkLog(item, workLogItemType.workItem)">
+                <div class="item-icon">
+                  <i class="{{item?.workLogItemClass?.class}}"></i>
+                </div>
+                <div class="item-id {{item?.workLogItemClass?.color}}" [title]="item?.id">
+                  {{item?.id}}
+                </div>
+                <div class="item-name" [title]="item?.title">
+                  {{item?.title}}
+                </div>
+                <div class="item-level" [title]="item?.level?.name" *ngIf="item?.level?.name">
+                  {{item?.level?.name}}
+                </div>
+              </div>
+            </perfect-scrollbar>
+            <div class="item load-more-data" *ngIf="!logWorkPanelData?.workItemSearchDetails?.isLoadMore && !logWorkPanelData?.workItemSearchDetails?.isLoading">
+              <span>No more data to load</span>
+            </div>
+            <div class="item load-more-data" *ngIf="logWorkPanelData?.workItemSearchDetails?.isLoadMore && logWorkPanelData?.workItemSearchDetails?.isLoading">
+              <span>Loading...</span>
+            </div>
+            <div class="item" (click)="fillAddWorkLog(newWorklog,  workLogItemType.work)" *ngIf="newWorklog?.searchText">
+              <div>{{newWorklog?.searchText}}</div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="logWorkPanelData.selectedListType === workLogSearchListTypeConstants.internal">
+            <perfect-scrollbar class="internal-item-container">
+              <div class="item internal-item" *ngFor="let item of logWorkPanelData.internalCategorySearchDetails.list | arrayFilter: filterInternalCategoryByName: newWorklog.searchText"
+                (click)="fillAddWorkLog(item, workLogItemType.internalCategory)">
+                <div class="item-icon">
+                  <i class="{{item?.workLogItemClass?.class}}"></i>
+                </div>
+                <div class="internal-name" [title]="item.name">{{item.name}}</div>
+                <div class="category-name" [title]="item.categoryName">
+                  <i class="ck ck-dot {{item.categoryColorClass}}"></i>
+                  <span>{{item.categoryName}}</span>
+                </div>
+              </div>
+            </perfect-scrollbar>
+            <div class="item load-more-data" *ngIf="logWorkPanelData?.internalCategorySearchDetails?.isLoading">
+              <span>Loading...</span>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="new-cockpit-body-cell project-col" *ngIf="thirdPartyConfigurationStatus.configured === userSearchPanelDetails.thirdPartyConfigurationStatus">
+      <div ngbDropdown ngbDropdownReposition class="custom-dropdown d-block" *ngIf="logWorkPanelData?.showAddLayout">
+        <div ngbDropdownToggle>
+          <span class="text" [title]="newWorklog?.synergyDetail?.project?.name ? newWorklog?.synergyDetail?.project?.name : 'Select project'">{{newWorklog?.synergyDetail?.project?.name
+            ? newWorklog?.synergyDetail?.project?.name : 'Select project'}}</span>
+          <span class="ck ck-arrow_down"></span>
+        </div>
+        <div class="project-col-dropdown table-dropdown append-to-body" ngbDropdownMenu [ngStyle]="{'display': projectList?.length ? 'block': 'none'}">
+          <div class="dropdown-item scrollable-menu">
+            <table>
+              <tbody>
+                <tr [ngClass]="{'active': project?.code === newWorklog?.synergyDetail?.project?.code}" *ngFor="let project of projectList"
+                  (click)="onSelectProject(newWorklog, project)">
+                  <td class="id-col">{{project?.id}}</td>
+                  <td class="name-col">{{project?.name}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="new-cockpit-body-cell activity-col" *ngIf="thirdPartyConfigurationStatus.configured === userSearchPanelDetails.thirdPartyConfigurationStatus">
+      <div ngbDropdown ngbDropdownReposition class="custom-dropdown d-block" *ngIf="logWorkPanelData?.showAddLayout">
+        <div ngbDropdownToggle (click)="getActivities(newWorklog?.synergyDetail?.project)">
+          <span class="text" [title]="newWorklog?.synergyDetail?.activity?.name ? newWorklog?.synergyDetail?.activity?.name : 'Select activity'">{{newWorklog?.synergyDetail?.activity?.name
+            ? newWorklog?.synergyDetail?.activity?.name : 'Select activity'}}</span>
+          <span class="ck ck-arrow_down"></span>
+        </div>
+        <div class="activity-col-dropdown table-dropdown append-to-body" ngbDropdownMenu [ngStyle]="{'display': activityDetails?.list?.length ? 'block': 'none'}">
+          <div class="dropdown-item scrollable-menu">
+            <table>
+              <tbody>
+                <tr [ngClass]="{'active': activity?.code === newWorklog?.synergyDetail?.activity?.code}" *ngFor="let activity of activityDetails?.list"
+                  (click)="onSelectActivity(newWorklog, activity)">
+                  <td class="id-col">{{activity?.id}}</td>
+                  <td class="name-col">{{activity?.name}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="new-cockpit-body-cell level-col">
+      <span class="cell-label" [title]="newWorklog?.level?.name" *ngIf="newWorklog?.workLogItemType === workLogItemType?.workItem && logWorkPanelData?.showAddLayout">{{newWorklog?.level?.name}}</span>
+      <div ngbDropdown ngbDropdownReposition class="custom-dropdown d-block" autoClose="outside" #levelDropdown="ngbDropdown" *ngIf="newWorklog?.workLogItemType !== workLogItemType?.workItem && logWorkPanelData?.showAddLayout">
+        <div ngbDropdownToggle (click)="setSelectedLevel(tree, newWorklog?.level)">
+          <span class="text" [title]="newWorklog?.level?.name ? newWorklog?.level?.name : 'Select level'">{{newWorklog?.level?.name
+            ? newWorklog?.level?.name : 'Select level'}}</span>
+          <span class="ck ck-arrow_down"></span>
+        </div>
+        <div class="activity-col-dropdown append-to-body" ngbDropdownMenu>
+          <div class="customTree">
+            <div class="search-box">
+              <input id="filter" #filter (keyup)="tree.treeModel.filterNodes(filter.value, true)" placeholder="Search" class="tree-filter"
+              />
+              <span class="ck ck-search"></span>
+            </div>
+            <perfect-scrollbar class="scroller">
+              <tree-root #tree [nodes]="organizationLevelList">
+                <ng-template #treeNodeTemplate let-node let-index="index">
+                  <span (click)="onSelectLevel(newWorklog, levelDropdown, node)" [title]="node?.data?.name">{{node?.data?.name}}</span>
+                </ng-template>
+              </tree-root>
+            </perfect-scrollbar>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="new-cockpit-body-cell category-col" *ngIf="accountRegionSetting?.isDisplayCategory">
+      <span class="label" [title]="newWorklog?.categoryName" *ngIf="logWorkPanelData?.showAddLayout &&  newWorklog?.categoryName && newWorklog?.workLogItemType === workLogItemType?.internalCategory">
+        <i class="ck ck-dot {{newWorklog?.categoryColorClass}}"></i>
+        <span class="text" [title]="newWorklog?.categoryName">{{newWorklog?.categoryName}}</span>
+      </span>
+      <ng-container *ngIf="logWorkPanelData?.showAddLayout && newWorklog?.workLogItemType !== workLogItemType?.internalCategory">
+        <div ngbDropdown ngbDropdownReposition class="custom-dropdown d-block">
+          <div ngbDropdownToggle>
+            <div class="selected-text">
+              <i class="ck ck-dot {{newWorklog?.categoryColorClass}}" *ngIf="newWorklog?.categoryName"></i>
+              <span class="text" [title]="newWorklog?.categoryName ? newWorklog?.categoryName : 'Select category'">{{newWorklog?.categoryName
+                ? newWorklog?.categoryName : 'Select category'}}</span>
+              <span class="ck ck-arrow_down"></span>
+            </div>
+          </div>
+          <div class="append-to-body category-dropdown" ngbDropdownMenu [ngStyle]="{'display': categoryList?.length ? 'block': 'none'}">
+            <perfect-scrollbar class=" scrollable-menu">
+              <ul class="dropdown-list">
+                <li *ngFor="let category of categoryList" (click)="onSelectCategory(newWorklog, category)">
+                  <i class="ck ck-dot {{category?.colorClass}}"></i>
+                  <span class="text" [title]="category?.name">{{category?.name}}</span>
+                </li>
+              </ul>
+            </perfect-scrollbar>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="new-cockpit-body-cell hours-col" [ngClass]="{'normal-border': logWorkPanelData?.showAddLayout}">
+      <ng-container *ngIf="!logWorkPanelData?.showAddLayout">
+        <div class="hours-cell" [ngClass]="{'weekoffs': (day?.weekDay === 0 || day?.weekDay === 6)}" [ngStyle]="{'display': ((day?.weekDay === 0 || day?.weekDay === 6) && !accountRegionSetting?.isDisplayWeekend)?'none':'block'}"
+          *ngFor="let day of calendarNavigationDetails.days">
+          <div class="day">{{(day.date | date:'EEEEEE')}}</div>
+          <div class="date">{{day?.date | date:'d'}}</div>
+        </div>
+      </ng-container>
+      <button class="add-btn" *ngIf="logWorkPanelData?.showAddLayout">Add</button>
+      <span class="ck ck-cancel cancel-btn" *ngIf="logWorkPanelData?.showAddLayout" (click)="resetAddNewWorkLog()"></span>
+    </div>
+    <div class="new-cockpit-body-cell total-col"></div>
+    <div class="new-cockpit-body-cell operations-col"></div>
+  </div>
+</form>

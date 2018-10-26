@@ -1,0 +1,8 @@
+<div class="app-container">
+  <app-navbar></app-navbar>
+  <app-feedback-service *ngIf="globalConstants?.feedbackServiceDomain && globalConstants?.featureToggleConfig?.feedbackService"></app-feedback-service>
+  <app-spinner></app-spinner>
+  <div class="pl-0" id="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

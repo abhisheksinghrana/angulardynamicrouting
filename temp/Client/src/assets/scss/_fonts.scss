@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,400i|Roboto:400,400i,500,500i');
+
+$font-body: 'Noto Sans', sans-serif !global;
+$font-header: 'Roboto', sans-serif !global;
+
+$base-font-size: 16px; // Base Font, "Noto"
+$large-font: 1.125rem; // 18px Main Headings, "Roboto"
+$medium-font: 1rem; // 16px Small Headings, "Roboto"
+$x-medium-font: 0.875rem; // 14px Small Headings, "Roboto"
+$small-font: 0.8125rem; // 13px Body Content, "Noto"
+$x-small-font: 0.75rem; // 12px Smaller than Body Content, "Noto"
+$xx-small-font: 0.6875rem; // 11px Footer text, animated placeholder, "Noto"

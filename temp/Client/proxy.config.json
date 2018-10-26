@@ -1,0 +1,6 @@
+{
+    "/v1": {
+        "target": "http://localhost:35610",
+        "secure": false
+     }
+}

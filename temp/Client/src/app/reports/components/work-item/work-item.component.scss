@@ -1,0 +1,80 @@
+@import '~bootstrap/scss/mixins';
+@import '~assets/scss/_common';
+
+.new-cockpit-table-row {
+  max-height: 40px;
+}
+
+.new-cockpit-body-cell {
+  color: inherit;
+}
+
+.worklog-col {
+  width: 70%;
+  text-align: left;
+  color: $mole-grey-color;
+  padding: 8px;
+
+  .content {
+    @include text-truncate();
+  }
+
+  .item-icon {
+    font-size: $large-font;
+    margin-right: 2px;
+  }
+
+  .item-id {
+    margin: 0 2px;
+  }
+
+  .item-user-image {
+    margin-right: 5px;
+
+    img {
+      width: 24px;
+      height: 24px;
+      border: 1px solid $mouse-grey-color;
+      border-radius: 50%;
+    }
+  }
+
+  .text {
+    vertical-align: super;
+  }
+}
+
+.sum-col {
+  @include text-truncate();
+  width: 30%;
+  border-right: 1px solid $secondary-color;
+  text-align: right;
+}
+
+.level1 {
+  font-weight: 600;
+}
+
+.level2 {
+  .content {
+    padding-left: 20px;
+  }
+}
+
+.level3 {
+  .content {
+    padding-left: 40px;
+  }
+}
+
+.level4 {
+  .content {
+    padding-left: 60px;
+  }
+}
+
+.level5 {
+  .content {
+    padding-left: 80px;
+  }
+}

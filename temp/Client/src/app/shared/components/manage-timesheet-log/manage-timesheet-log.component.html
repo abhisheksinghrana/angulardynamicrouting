@@ -1,0 +1,152 @@
+<div class="new-cockpit-table-row">
+  <div class="new-cockpit-body-cell work-col">
+    <div class="content">
+      <span class="item-icon {{worklog?.workLogItemClass?.class}}"></span>
+      <input type="text" [ngClass]="{'error': !worklog?.work && isSheetSubmitted}" [(ngModel)]="worklog.work" maxlength="250" *ngIf="worklog?.enableEditWork && (!isTimesheetFreezed || !worklog?.id) && worklog?.workLogItemType === workLogItemType?.work"
+        (blur)="worklog?.work ? worklog.enableEditWork=false:''" placeholder="Enter work detail" autofocus>
+      <label [class.work]="worklog?.workLogItemType === workLogItemType?.work && (!isTimesheetFreezed || !worklog?.id)" *ngIf="!worklog?.enableEditWork && worklog?.workLogItemType === workLogItemType?.work"
+        title="{{worklog?.work}}" (click)="!isTimesheetFreezed || !worklog?.id ? worklog.enableEditWork=true:''">{{worklog?.work}}</label>
+      <label *ngIf="worklog?.workLogItemType === workLogItemType?.workItem" title="{{worklog?.workItem?.title}}">{{worklog?.workItem?.title}}</label>
+      <label *ngIf="worklog?.workLogItemType === workLogItemType?.internalCategory" title="{{worklog?.internalCategoryName}}">{{worklog?.internalCategoryName}}</label>
+      <div class="description-container" *ngIf="!isTimesheetFreezed || !worklog?.id || (worklog?.description && isTimesheetFreezed)">
+        <button class="description ck ck-note" [ngClass]="{'filled': worklog?.description}" placement="bottom-left" container="body"
+          [ngbPopover]="descriptionPopover" triggers="manual" #popover="ngbPopover" attr.data-popovername="descriptionPopover{{index}}"
+          (click)="toggleDescriptionPopover(popover, worklog)">
+        </button>
+        <ng-template #descriptionPopover>
+          <div class="description-popover" (clickOutside)="clickOutsideDescriptionPopover($event, popover, index)">
+            <div [ngStyle]="{'display': worklog?.enableEditDescription? 'none': 'display'}">
+              <span [title]="worklog?.description">{{worklog?.description}}</span>
+              <span class="ck ck-edit" (click)="worklog.enableEditDescription = true" *ngIf="!isTimesheetFreezed || !worklog?.id"></span>
+            </div>
+            <div *ngIf="worklog?.enableEditDescription && (!isTimesheetFreezed || !worklog?.id)">
+              <textarea maxlength="250" cols="30" rows="5" placeholder="Add a description" [(ngModel)]="worklog.tempDescription"></textarea>
+              <div class="btn-block">
+                <input class="ac-button ac-secondary ac-small" type="button" value="Cancel" (click)="closeDescriptionPopover(popover)">
+                <input class="ac-button ac-primary ac-small btn-save" type="button" value="Save" (click)="saveDescriptionPopover(popover, worklog)">
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <div class="new-cockpit-body-cell project-col" *ngIf="thirdPartyConfigurationStatus.configured === _userService.userDetails.thirdPartyConfigurationStatus">
+    <span class="cell-label" [title]="worklog?.synergyDetail?.project?.name" *ngIf="isTimesheetFreezed && worklog?.id">{{worklog?.synergyDetail?.project?.name}}</span>
+    <div ngbDropdown ngbDropdownReposition class="custom-dropdown d-block" [class.error]="!worklog?.synergyDetail?.project?.id && isSheetSubmitted"
+      *ngIf="!isTimesheetFreezed || !worklog?.id">
+      <div ngbDropdownToggle>
+        <span class="text" [title]="worklog?.synergyDetail?.project?.name ? worklog?.synergyDetail?.project?.name : 'Select project'">{{worklog?.synergyDetail?.project?.name
+          ? worklog?.synergyDetail?.project?.name : 'Select project'}}</span>
+        <span class="ck ck-arrow_down"></span>
+      </div>
+      <div class="project-col-dropdown table-dropdown append-to-body" ngbDropdownMenu [ngStyle]="{'display': projectList?.length ? 'block': 'none'}">
+        <div class="dropdown-item scrollable-menu">
+          <table>
+            <tbody>
+              <tr [ngClass]="{'active': project?.code === worklog?.synergyDetail?.project?.code}" *ngFor="let project of projectList" (click)="onSelectProject(worklog, project)">
+                <td class="id-col">{{project?.id}}</td>
+                <td class="name-col">{{project?.name}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="new-cockpit-body-cell activity-col" *ngIf="thirdPartyConfigurationStatus.configured === _userService.userDetails.thirdPartyConfigurationStatus">
+    <span class="cell-label" [title]="worklog?.synergyDetail?.activity?.name" *ngIf="isTimesheetFreezed && worklog?.id">{{worklog?.synergyDetail?.activity?.name}}</span>
+    <div ngbDropdown ngbDropdownReposition class="custom-dropdown d-block" [class.error]="!worklog?.synergyDetail?.activity?.id && isSheetSubmitted"
+      *ngIf="!isTimesheetFreezed || !worklog?.id">
+      <div ngbDropdownToggle (click)="getActivities(worklog?.synergyDetail?.project)">
+        <span class="text" [title]="worklog?.synergyDetail?.activity?.name ? worklog?.synergyDetail?.activity?.name : 'Select activity'">{{worklog?.synergyDetail?.activity?.name
+          ? worklog?.synergyDetail?.activity?.name : 'Select activity'}}</span>
+        <span class="ck ck-arrow_down"></span>
+      </div>
+      <div class="activity-col-dropdown table-dropdown append-to-body" ngbDropdownMenu [ngStyle]="{'display': activityDetails?.list?.length ? 'block': 'none'}">
+        <div class="dropdown-item scrollable-menu">
+          <table>
+            <tbody>
+              <tr [ngClass]="{'active': activity?.code === worklog?.synergyDetail?.activity?.code}" *ngFor="let activity of activityDetails?.list"
+                (click)="onSelectActivity(worklog, activity)">
+                <td class="id-col">{{activity?.id}}</td>
+                <td class="name-col">{{activity?.name}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="new-cockpit-body-cell level-col">
+    <span class="cell-label" [title]="worklog?.level?.name" *ngIf="worklog?.workLogItemType === workLogItemType?.workItem || (isTimesheetFreezed && worklog?.id)">{{worklog?.level?.name}}</span>
+    <div ngbDropdown ngbDropdownReposition class="custom-dropdown d-block" autoClose="outside" #levelDropdown="ngbDropdown" [class.error]="worklog?.workLogItemType === workLogItemType?.workItem && !worklog?.level?.id && isSheetSubmitted"
+      *ngIf="worklog?.workLogItemType !== workLogItemType?.workItem && (!isTimesheetFreezed || !worklog?.id)">
+      <div ngbDropdownToggle (click)="setSelectedLevel(tree, worklog?.level)">
+        <span class="text" [title]="worklog?.level?.name ? worklog?.level?.name : 'Select level'">{{worklog?.level?.name
+          ? worklog?.level?.name : 'Select level'}}</span>
+        <span class="ck ck-arrow_down"></span>
+      </div>
+      <div class="append-to-body" ngbDropdownMenu>
+        <div class="customTree">
+          <div class="search-box">
+            <input id="filter" #filter (keyup)="tree.treeModel.filterNodes(filter.value, true)" placeholder="Search" class="tree-filter"
+            />
+            <span class="ck ck-search"></span>
+          </div>
+          <perfect-scrollbar class="scroller">
+            <tree-root #tree [nodes]="organizationLevelList" [focused]="true">
+              <ng-template #treeNodeTemplate let-node let-index="index">
+                <span class="name" (click)="onSelectLevel(worklog, levelDropdown, node)" [title]="node?.data?.name">{{node?.data?.name}}</span>
+              </ng-template>
+            </tree-root>
+          </perfect-scrollbar>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="new-cockpit-body-cell category-col" *ngIf="accountRegionSetting?.isDisplayCategory">
+    <span class="label" [title]="worklog?.categoryName" *ngIf="worklog?.categoryName && (worklog?.workLogItemType === workLogItemType?.internalCategory || (isTimesheetFreezed && worklog?.id))">
+      <i class="ck ck-dot {{worklog?.categoryColorClass}}"></i>
+      <span class="text" [title]="worklog?.categoryName">{{worklog?.categoryName}}</span>
+    </span>
+    <div ngbDropdown ngbDropdownReposition class="custom-dropdown d-block" [class.error]="worklog?.workLogItemType === workLogItemType?.internalCategory && !worklog?.categoryId && isSheetSubmitted"
+      *ngIf="worklog?.workLogItemType !== workLogItemType?.internalCategory && (!isTimesheetFreezed || !worklog?.id)">
+      <div ngbDropdownToggle>
+        <div class="selected-text">
+          <i class="ck ck-dot {{worklog?.categoryColorClass}}" *ngIf="worklog?.categoryName"></i>
+          <span class="text" [title]="worklog?.categoryName ? worklog?.categoryName : 'Select category'">{{worklog?.categoryName
+            ? worklog?.categoryName : 'Select category'}}</span>
+          <span class="ck ck-arrow_down"></span>
+        </div>
+      </div>
+      <div class="append-to-body category-dropdown" ngbDropdownMenu [ngStyle]="{'display': categoryList?.length ? 'block': 'none'}">
+        <perfect-scrollbar class=" scrollable-menu">
+          <ul class="dropdown-list">
+            <li *ngFor="let category of categoryList" (click)="onSelectCategory(worklog, category)">
+              <i class="ck ck-dot {{category?.colorClass}}"></i>
+              <span class="text" [title]="category?.name">{{category?.name}}</span>
+            </li>
+          </ul>
+        </perfect-scrollbar>
+      </div>
+    </div>
+  </div>
+  <div class="new-cockpit-body-cell hours-col" [class.error]="!worklog?.totalSpent && isSheetSubmitted">
+    <div class="hours-cell" [ngClass]="{'weekoffs': (work?.weekDay === 0 || work?.weekDay === 6)}" [ngStyle]="{'display': ((work?.weekDay === 0 || work?.weekDay === 6) && !accountRegionSetting?.isDisplayWeekend)?'none':'block'}"
+      *ngFor="let work of worklog.workLogDetails">
+      <input class="spent" type="text" [(ngModel)]="work.spent" placeholder="-" maxlength="5" (focus)="updateCurrentlySelectedHourValue(work.spent)"
+        (blur)="validateDayLogTimeLimit(worklog, work)" appOnlyNumber [max]="24" tabindex="1" />
+      <span class="slash" *ngIf="accountRegionSetting?.isDisplayForecast"></span>
+      <input class="forecast" type="text" placeholder="-" maxlength="5" appOnlyNumber [max]="24" tabindex="1" *ngIf="accountRegionSetting?.isDisplayForecast"
+      />
+    </div>
+  </div>
+  <div class="new-cockpit-body-cell total-col">{{worklog?.totalSpent + 'h'}}
+    <span *ngIf="accountRegionSetting?.isDisplayForecast">/ 0h</span>
+  </div>
+  <div class="new-cockpit-body-cell operations-col">
+    <span class="ck ck-trash" (click)="worklog.showDeleteWorklogConfirmationBar = true"></span>
+  </div>
+  <app-confirmation-bar [title]="'Delete worklog ?'" (response)="onDeleteConfirmation($event, worklog, index)" *ngIf="worklog?.showDeleteWorklogConfirmationBar"></app-confirmation-bar>
+</div>

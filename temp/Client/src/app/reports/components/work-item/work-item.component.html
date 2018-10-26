@@ -1,0 +1,24 @@
+<div class="new-cockpit-table-row level{{level}}">
+  <div class="new-cockpit-body-cell worklog-col">
+    <div class="content">
+      <span class="item-icon {{worklogDetails?.workLogItemClass?.class}}" *ngIf="worklogDetails?.workLogItemClass?.class"></span>
+      <span class="item-id {{worklogDetails?.workLogItemClass?.color}}" [title]="worklogDetails?.workItem?.title" *ngIf="worklogDetails?.workLogItemType === workLogItemType?.workItem">
+        {{worklogDetails?.workItem?.id}}
+      </span>
+      <span [title]="worklogDetails?.work" *ngIf="worklogDetails?.workLogItemType === workLogItemType?.work">{{worklogDetails?.work}}</span>
+      <span [title]="worklogDetails?.workItem?.title" *ngIf="worklogDetails?.workLogItemType === workLogItemType?.workItem">{{worklogDetails?.workItem?.title}}</span>
+      <span [title]="worklogDetails?.internalCategory?.name" *ngIf="worklogDetails?.workLogItemType === workLogItemType?.internalCategory">{{worklogDetails?.internalCategory?.name}}</span>
+      <span [title]="worklogDetails?.category?.name" *ngIf="worklogDetails?.workLogItemType === workLogItemType?.category">{{worklogDetails?.category?.name}}</span>
+      <span [title]="worklogDetails?.project" *ngIf="worklogDetails?.workLogItemType === workLogItemType?.project">{{worklogDetails?.project}}</span>
+      <span [title]="worklogDetails?.activityCode" *ngIf="worklogDetails?.workLogItemType === workLogItemType?.activityCode">{{worklogDetails?.activityCode}}</span>
+      <span class="item-user-image" *ngIf="worklogDetails?.workLogItemType === workLogItemType?.user">
+        <img [src]="worklogDetails?.employee?.profileImageUrl" alt="" />
+      </span>
+      <span class="text" [title]="worklogDetails?.employee?.fullName" *ngIf="worklogDetails?.workLogItemType === workLogItemType?.user">{{worklogDetails?.employee?.fullName}}</span>
+    </div>
+  </div>
+  <div class="new-cockpit-body-cell sum-col">
+    <span [title]="worklogDetails?.totalSpent">{{worklogDetails?.totalSpent + 'h'}}</span>
+  </div>
+</div>
+<app-work-item [worklogDetails]="worklog" [level]="level+1" *ngFor="let worklog of worklogDetails?.children"></app-work-item>
